@@ -1,1 +1,4 @@
 # 03_JSCore
+
+<strong>01. JAVASCRIPT SYNTAX AND OPERATORS</strong></br>
+<strong>02. JAVASCRIPT SYNTAX AND OPERATORS - EXERCISE</strong></br>
