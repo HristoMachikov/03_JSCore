@@ -1,0 +1,14 @@
+Extensions for JS
+-Beautify
+-JSHint
+sHift+Aft+F 
+
+function days(daysOfWeek){
+    return [].indexOf(daysOfWeek);
+}
+
+solve(arr)
+for
+let token = arr[i].split(', ')
+
+tolcens.includes("suger")
