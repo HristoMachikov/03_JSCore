@@ -1,0 +1,3 @@
+developer.mozila
+scc pickals
+document.querySelector('.header-section a.').setAtribute('http', 'http=fdfg')
