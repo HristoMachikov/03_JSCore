@@ -14,10 +14,11 @@ function solve() {
 		contentElement.textContent = createContentValue;
 
 		let articleElement = document.createElement('article');
-		articleElement.appendChild(h3);
-		articleElement.appendChild(p);
+		articleElement.appendChild(titleElement);
+		articleElement.appendChild(contentElement);
+
 		createArticleList.appendChild(articleElement);
 	};
-
-	
+	createTitleElement.value = "";
+	createContentElement.value = "";
 };
