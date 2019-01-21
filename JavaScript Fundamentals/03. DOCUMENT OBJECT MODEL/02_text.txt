@@ -1,3 +1,5 @@
 developer.mozila
 scc pickals
 document.querySelector('.header-section a.').setAtribute('http', 'http=fdfg')
+
+https://stackoverflow.com/questions/41741514/how-to-get-the-innerhtml-innertext-from-a-related-node-of-a-clicked-element
