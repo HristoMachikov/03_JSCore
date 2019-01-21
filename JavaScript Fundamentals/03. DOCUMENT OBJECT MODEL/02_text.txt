@@ -3,3 +3,13 @@ scc pickals
 document.querySelector('.header-section a.').setAtribute('http', 'http=fdfg')
 
 https://stackoverflow.com/questions/41741514/how-to-get-the-innerhtml-innertext-from-a-related-node-of-a-clicked-element
+
+
+Array.from(kolekciq) = масив
+foreach рабори с масиви !
+
+queriSelector('#player2Div img[name='${rightSpan.textContent}']');
+winer.style.border = '2px solid green' - .style сетва стиловете на елемента 
+
+let asiValu= char.charCodeAt(0)
+newMessage += String.fromCharCode(asiValu)
