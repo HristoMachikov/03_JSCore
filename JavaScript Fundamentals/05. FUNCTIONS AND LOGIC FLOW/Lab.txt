@@ -1,0 +1,7 @@
+filter(x =>/\s+/.test(x))
+
+foreach(x => /\s+/.test(x))
+JSON.parse
+JSON.Srtingify
+arr=[]
+doc.querySelectorAll('tbody tr td').foreach(x => arr.push(x.textContent)
