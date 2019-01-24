@@ -3,8 +3,11 @@ function solve() {
     hexaElem.textContent = "Hexadecimal";
     let binaryElem = document.createElement('option');
     binaryElem.textContent = "Binary"
-    document.getElementById('selectMenuTo').appendChild(hexaElem);
+    // binaryElem.setAttribute("select value", "binary");
+    let removedElem = document.getElementsByTagName('option')[1];
+    document.getElementById('selectMenuTo').removeChild(removedElem);
     document.getElementById('selectMenuTo').appendChild(binaryElem);
+    document.getElementById('selectMenuTo').appendChild(hexaElem);
     let convertBtn = Array.from(document.getElementsByTagName('button'))[0];
     convertBtn.addEventListener('click', calculate);
     function calculate(event) {
