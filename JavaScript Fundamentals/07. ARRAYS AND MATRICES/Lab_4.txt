@@ -1,0 +1,24 @@
+Value type - Steck
+Reff type - Heap
+
+Array.isArray(arr);
+JSON.parse(string)
+JSON.stringify(obj)
+
+ctrl + K + C - comment
+ctrl + K + U - uncomment
+tag sugg
+
+sort(),pop(), splice(!) - мутираща функция(работи върху същия масив)
+pop() - вади последния елемент
+shift() - вади първия елемент от масива
+unshift(3) - добавя първи елемент в масива
+
+ctrl+shft-space - вътре във функцията
+concat()
+
+slice() - немутираща ф-ция (създава нов масив) 
+map() (kato select in C#)
+
+for (elem of arr) - хваща value (kato foreach v C#)
+for (elem in arr) - хваща index

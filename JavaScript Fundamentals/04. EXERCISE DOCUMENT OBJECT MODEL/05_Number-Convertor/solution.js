@@ -10,14 +10,14 @@ function solve() {
     let convertBtn = Array.from(document.getElementsByTagName('button'))[0];
     convertBtn.addEventListener('click', calculate);
     function calculate(event) {
-        let currentNumbEle = document.getElementById('input');
+        let currentNumb = document.getElementById('input').value;
         let num;
         let currSelectElem = document.getElementById("selectMenuTo");
         let currDim = currSelectElem.options[currSelectElem.selectedIndex].value;
         if (currDim === "hexadecimal") {
-            num = parseInt(currentNumbEle.value, 10).toString(16);
+            num = parseInt(currentNumb, 10).toString(16);
         } else if (currDim === "binary") {
-            num = parseInt(currentNumbEle.value, 10).toString(2);
+            num = parseInt(currentNumb, 10).toString(2);
         };
         let convertElem = document.getElementById('result');
         convertElem.value = num.toUpperCase();
