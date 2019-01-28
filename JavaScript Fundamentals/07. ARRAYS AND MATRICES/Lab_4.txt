@@ -22,3 +22,7 @@ map() (kato select in C#)
 
 for (elem of arr) - хваща value (kato foreach v C#)
 for (elem in arr) - хваща index
+
+let step = Number(arr.pop());
+
+a.localCompare(b);
