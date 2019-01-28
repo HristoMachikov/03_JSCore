@@ -1,37 +1,33 @@
 function solve(arr) {
     let check = true;
     let sumRow = 0;
-    let counter = 2;
-    let sumCol = 0;
+
     for (let row = 0; row < arr.length; row++) {
         let currSumRow = 0;
-        for (let nRow of nRowArr) {
-            currSumRow += nRow;
+        for (let col = 0; col < arr[row].length; col++) {
+            currSumRow += arr[row][col]
         }
-        console.log(arr[row[i]])
-        sumCol = arr[row[i] + counter] + arr[row[i] + counter - 1] + arr[row[i] + counter - 2];
         if (sumRow === 0) {
             sumRow = currSumRow;
-        } else if (sumRow !== currSumRow || sumCol !=currSumRow) {
+        } else if (sumRow !== currSumRow) {
             check = false;
+            break;
         }
-        //currSumRow = 0;
-        counter -= 1;
     }
 
-    // for (let col = 0; col < arr.length; col++) {
-    //     let currSumRow = 0;
-    //     for (let nRow of nRowArr) {
-    //         currSumRow += nRow;
-    //     }
-    //     sumCol = arr[row[i]];
-    //     if (sumRow === 0) {
-    //         sumRow = currSumRow;
-    //     }
-    // }
+    for (let col = 0; col < arr[0].length; col++) {
+        let sumCol = 0;
+        for (let row = 0; row < arr.length; row++) {
+            sumCol += arr[row][col];
+        }
+        if (sumCol !== sumRow) {
+            check = false;
+            break;
+        }
+    }
     console.log(check);
-
 };
 solve([[4, 5, 6],
-[6, 5, 4],
-[5, 5, 5]]);
+ [6, 5, 4],
+ [5, 5, 5]]
+);

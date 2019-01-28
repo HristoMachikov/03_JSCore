@@ -8,11 +8,7 @@ function solve(rows, cols) {
         }
     }
 
-    // for (let row of matrix) {
-    //     console.log(row.join(" "));
-    // }
-
-    let counter = 0;
+    let counter = 1;
     let currRow = 0;
     let currCol = 0;
     let dir = "r";
@@ -52,7 +48,5 @@ function solve(rows, cols) {
     for (let row of matrix) {
         console.log(row.join(" "));
     }
-
-    //console.log()
 };
-solve(3, 3);
+solve(5, 5);

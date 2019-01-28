@@ -6,5 +6,8 @@ function solve([cols, rows, startRow, startCol]) {
             matrix[row][col] = Math.max(Math.abs(row - startRow), Math.abs(col - startCol)) + 1;
         }
     }
-    console.log();
+    for (let row of matrix) {
+        console.log(row.join(' '));
+    }
 }
+solve([5, 5, 2, 2]);
