@@ -1,0 +1,39 @@
+value type			ref. type
+stack				heap
+string- value type
+
+let newNumber = new Number(5.55) - създава обект;
+
+newNumber == 5.55 -> true
+взима valueOf функцията на обекта  и връща примитивния тип (динамично)
+
+Coersion операции невидими за нас рапва стойности, когато имаме 2=
+При 3= това се забванява
+
+let arr2 = [1, 2, 3]; ->ref.type
+let arr3 = [1, 2, 3]; ->ref.type
+arr2 === arr3 -> false (сравнява референцията)
+arr2 == arr3 -> false (сравнява референцията)
+
+all	any	substring()	--------	C#
+every	some	substr()	substring()	JS
+
+
+evry връща true/false
+indexOf() = search()
+search() - по-бавен, работи с RegEx, връща индекса
+filter() - намалява масива
+
+camalCase - azSymBylgarche
+PascalCase - AzSymBylgarche
+
+спред оператор (...number) взима масива и го подава като отделни елементи
+
+regexr.com
++ едно или повече
+* 0 или повече
+w = [A-Za-z0-9_]
+. - хваща всичко след нея
+групата реферира стоиноста а не патерна
+
+patern.exec(string)
