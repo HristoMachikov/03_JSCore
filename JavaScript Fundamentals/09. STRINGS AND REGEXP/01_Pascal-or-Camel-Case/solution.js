@@ -6,15 +6,14 @@ function solve() {
   let resultText = firstString.toLowerCase()
     .split(' ')
     .filter(x => x != "")
-    .map(e => e.charAt(0).toUperCase() + e.slice(1))
+    //filter(x => x)
+    .map(e => e.charAt(0).toUpperCase() + e.slice(1))
     .join('');
 
   if (secondString != "Camel Case" && secondString != "Pascal Case") {
-    resultText = "Error"
+    resultText = "Error!"
   } else if (secondString == "Camel Case") {
     resultText = resultText.charAt(0).toLowerCase() + resultText.slice(1);
   }
   resultEelem.textContent = resultText;
-
-  //filter(x => x)
 }

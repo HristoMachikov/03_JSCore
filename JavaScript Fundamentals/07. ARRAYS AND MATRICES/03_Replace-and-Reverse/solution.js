@@ -1,13 +1,13 @@
 function solve() {
-  let inputText = document.getElementById("arr");
+  let inputText = document.getElementById("arr").value;
   let inputArr = JSON.parse(inputText);
+  let resultElem = document.getElementById("result");
+
   inputArr.forEach((elem, index, arr) => {
     arr[index] = elem.split('').reverse().join('');
-    //return reversedWord;
+    //inputArr.forEach(x => x.split('').reverse().join(''));
   });
-  let resultArr = inputArr.map(word => word.charAt(0).toUpperCase() + word.slice(1) )
-  //inputArr.forEach(x => x.split('').reverse().join(''));
-
-  let resultElem = document.getElementById("result");
-  resultElem.textContent = resultArr.join('');
+  let resultArr = inputArr.map(word => word.charAt(0).toUpperCase() + word.slice(1)
+  );
+  resultElem.textContent = resultArr.join(' ');
 }

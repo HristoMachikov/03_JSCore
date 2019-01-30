@@ -15,8 +15,8 @@ let arr3 = [1, 2, 3]; ->ref.type
 arr2 === arr3 -> false (сравнява референцията)
 arr2 == arr3 -> false (сравнява референцията)
 
-all	any	substring()	--------	C#
-every	some	substr()	substring()	JS
+C# - select()	all	any	substring()	--------	foreEach
+JS - map()	every	some	substr()	substring()	for(elem of arr)	
 
 
 evry връща true/false
