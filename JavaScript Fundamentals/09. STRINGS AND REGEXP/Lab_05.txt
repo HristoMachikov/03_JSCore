@@ -22,7 +22,7 @@ JS - map()	every	some	substr()	substring()	for(elem of arr)
 evry връща true/false
 indexOf() = search()
 search() - по-бавен, работи с RegEx, връща индекса
-filter() - намалява масива
+filter() - намалява масива, връща true/false
 
 camalCase - azSymBylgarche
 PascalCase - AzSymBylgarche
