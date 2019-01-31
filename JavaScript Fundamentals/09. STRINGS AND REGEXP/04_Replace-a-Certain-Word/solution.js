@@ -7,10 +7,10 @@ function solve() {
   //let resultArr = 
   inputArr.forEach((x, index, arr) => {
     console.log(x)
-    let match = /matchWord/gi;
+    let match = /"\w+ \w+ ([a-zA-Z]+)/i;
     let search = x.replace(match, inputStr)
     arr[index] = search;
-    console.log(search)
+    console.log(arr[index])
     // x.split(' ')
     //   //.filter(w => w !== "")
     //   .map((word, index, arr) => {
