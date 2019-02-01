@@ -1,0 +1,14 @@
+events
+- onclick
+- onmouseover
+- onmouseout
+при извикване на event c .addEventListener евентите са без 'on'
+
+type = "subbmit" - >event.preventDefault() da ne se refreshva
+
+events в js се изпълняват отдолу нанагоре(bubbling,Propagation) child -> parent
+e.stopPropagation() - спира разпространението на евента 
+
+capturin -> хваща елем от parent -> child 
+
+JSON.parse -> работи за масиви и за обекти. Парсва в дълбочина и масиви и обекти.
