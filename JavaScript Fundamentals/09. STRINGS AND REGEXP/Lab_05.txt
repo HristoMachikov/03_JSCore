@@ -42,3 +42,6 @@ w = [A-Za-z0-9_]
 групата реферира стоиноста а не патерна
 
 patern.exec(string)
+
+
+["enCode", "Some messages are just not encoded what can you do? RE - ENCODE THEMNOW! - he said. Damn encode, ITSALLHETHINKSABOUT, eNcoDe BULL$#!%."]
