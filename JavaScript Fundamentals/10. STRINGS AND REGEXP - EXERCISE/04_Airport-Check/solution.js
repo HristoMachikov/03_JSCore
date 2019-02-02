@@ -1,19 +1,25 @@
 function solve() {
     let stringElem = document.getElementById('str');
     let resultElem = document.getElementById('result');
-    let [text, wantedInfo] = stringElem.value.split(', ');
+    //let [text, wantedInfo] = stringElem.value.split(', ');
+    let inArr = stringElem.value.split(', ');
+    let text = inArr[0];
+    let wantedInfo = inArr[1];
 
     let namePattern = / ([A-Z]+([A-Za-z]*)?)(-[A-Z][A-Za-z]*\.)?-([A-Z][A-Za-z]*)? /g;
     //                / [A-Z]+[a-z]*(-[A-Z]+[a-z]*\.)?-[A-Z]+[a-z]* /g;
     //let namePattern = / ([A-Z]+([a-zA-Z]*)?)(-[A-Z][a-zA-Z]*\.)?-([A-Z][a-zA-Z]*)? /g;
     let airportPattern = / [A-Z]{3}\/[A-Z]{3} /g;
     let fligthNumberPattern = / [A-Z]{1,3}[\d]{1,5} /g;
-    let companyPattern = /- ([A-Z]+([A-Za-z]*)?)\*([A-Z][A-Za-z]*)? /g;
-    //- [A-Z]+[a-z]*\*[A-Z]+[a-z]* /g;
+    let companyPattern = /- [A-Z][A-Za-z]*\*[A-Z][A-Za-z]* /g;
+    //- [A-Z]+[a-zA-Z]*\*[A-Z]+[a-zA-Z]* /g;
 
-    if (wantedInfo === "name") {
-        let matchName = text.match(namePattern)[0];
-        let name = matchName.trim().replace('-', " ");
+    if (wantedInfo === 'name') {
+        let matchName;
+        let name = "";
+        if ((matchName = text.match(namePattern)) !== null) {
+            name = matchName[0].trim().replace('-', " ");
+        }
         resultElem.textContent = `Mr/Ms, ${name}, have a nice flight!`;
     } else if (wantedInfo === 'flight') {
         let airport = text.match(airportPattern)[0].trim().split("/");
@@ -23,9 +29,11 @@ function solve() {
         let companyName = text.match(companyPattern)[0].slice(1).trim(' ').split('*').join(' ');
         resultElem.textContent = `Have a nice flight with ${companyName}.`;
     } else if (wantedInfo === 'all') {
-        let matchName = text.match(namePattern)[0];
-        
-        let name = matchName.trim().replace('-', " ");
+        let matchName;
+        let name = "";
+        if ((matchName = text.match(namePattern)) !== null) {
+            name = matchName[0].trim().replace('-', " ");
+        }
         let airport = text.match(airportPattern)[0].trim().split("/");
         let flightNumber = text.match(fligthNumberPattern)[0].trim();
         let companyName = text.match(companyPattern)[0].slice(1).trim(' ').split('*').join(' ');

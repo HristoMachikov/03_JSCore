@@ -44,4 +44,5 @@ w = [A-Za-z0-9_]
 patern.exec(string)
 
 
-["enCode", "Some messages are just not encoded what can you do? RE - ENCODE THEMNOW! - he said. Damn encode, ITSALLHETHINKSABOUT, eNcoDe BULL$#!%."]
+["enCode", "Some messages are just not encoded what can you do? ",
+"RE - ENCODE THEMNOW! - he said. ", "Damn encode, ITSALLHETHINKSABOUT, eNcoDe BULL$#!%."]
