@@ -44,12 +44,13 @@
             });
         });
 
-        let consoleElem = document.getElementById('result');
         let getValueBtn = document.querySelector('.button[value="Get Value"]');
         getValueBtn.onclick = getProperty;
 
         let getWholeObjEelem = document.querySelector(('.button[value="Get Whole Object"]'))
         getWholeObjEelem.addEventListener('click', getObject);
+
+        let consoleElem = document.getElementById('result');
         let obj = {};
 
         function addProperty() {
@@ -63,7 +64,7 @@
             let key = document.getElementById('key').value;
             consoleElem.value += obj[key] + '\n';
         }
-        
+
         function getObject() {
             consoleElem.value += JSON.stringify(obj) + '\n';
         }

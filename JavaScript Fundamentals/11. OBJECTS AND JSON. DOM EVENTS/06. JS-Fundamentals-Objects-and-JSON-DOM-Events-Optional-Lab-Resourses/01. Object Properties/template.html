@@ -39,23 +39,27 @@
         document.getElementById("button").addEventListener("click", function (event) {
             event.preventDefault()
         });
-        let obj = {};
+        //let obj = {};
         function addProperty() {
             let objKey = document.getElementById('key').value;
             let objValue = document.getElementById('value').value;
 
             //obj[objKey] = objValue;
-
             let obj = {
                 [objKey]: {
                     stamat: objValue
                 }
             }
-
-             
-
+            console.log(obj);
+            for (const key in obj) {
+                console.log(key);
+                console.log(obj[key]);
+                for (const currValue in obj[key]) {
+                    console.log(currValue);
+                    console.log(obj[key][currValue]);
+                }
+            }
             document.getElementById('result').value = JSON.stringify(obj);
-            // TODO
         }
     </script>
 </body>

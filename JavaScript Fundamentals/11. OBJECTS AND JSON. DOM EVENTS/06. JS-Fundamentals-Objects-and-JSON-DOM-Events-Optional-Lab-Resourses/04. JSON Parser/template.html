@@ -26,7 +26,7 @@
                     </div>
                 </form>
                 <label>Result</label>
-               <textarea readonly rows="10" cols="50" id="result"></textarea>
+                <textarea readonly rows="10" cols="50" id="result"></textarea>
             </div>
             <img id="softUni-person-img" src="./images/cw_2_New_Logo.png" alt="softUni-person">
         </main>
@@ -36,11 +36,33 @@
         </footer>
     </div>
     <script>
-        document.getElementById("button").addEventListener("click", function(event){
+        document.getElementById("button").addEventListener("click", function (event) {
             event.preventDefault()
         });
         function extractInfo() {
-            // TODO
+            let inputObj = JSON.parse(document.getElementById('input').value);
+            let commandElem = document.getElementById('command');
+
+            let resultElem = document.getElementById('result');
+            let commandArr = commandElem.value.split(' ');
+            let currTypeOrValue = commandArr[0];
+            let currKey = commandArr[commandArr.length - 1];
+            let result = "No such item";
+
+            if (currTypeOrValue === 'typeof') {
+                for (const key in inputObj) {
+                    if (key === currKey) {
+                        result = `Type: ${typeof(inputObj[key])}`;
+                    }
+                }
+            } else if (currTypeOrValue === 'value') {
+                for (const key in inputObj) {
+                    if (key === currKey) {
+                        result = `Value: ${inputObj[key]}`;
+                    }
+                }
+            }
+            resultElem.textContent = result;
         }
     </script>
 </body>
