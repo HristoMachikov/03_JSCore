@@ -10,6 +10,7 @@ function solve() {
     function stadium(event) {
         let sectionElem = event.target.parentNode.parentNode.parentNode.parentNode.parentNode;
         let currName = sectionElem.children[0].textContent;
+        //e.target.parentNode.cellIndex;
         let currCol = (Array.from(document.querySelectorAll('td > button')).indexOf(event.target) % 15) % 3;
         let sectorCol = document.querySelector('table > thead > tr').children[currCol].textContent;
         let currPrice = 0;

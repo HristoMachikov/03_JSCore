@@ -1,0 +1,3 @@
+divcheker
+
+https://pastebin.com/cjivzzFA методче което ни връща парент елемента като се подаде самия елемент и tagName. Вместо да пишем много пъти parentNote.Parent...
