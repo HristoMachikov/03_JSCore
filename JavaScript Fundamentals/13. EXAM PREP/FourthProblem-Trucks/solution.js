@@ -1,7 +1,74 @@
 function solve() {
-        let button = 
+    let buttons = document.getElementsByTagName('button');
+    buttons[0].addEventListener('click', addNewTruck);
+    buttons[1].addEventListener('click', addNewTires);
+    buttons[2].addEventListener('click', goToWork);
+    buttons[3].addEventListener('click', endOfTheShift);
 
+    let fieldsets = document.getElementsByTagName('fieldset');
+    let objOfTrucks = {};
+    let backupTires = [];
 
+    function addNewTruck() {
+        let plate = document.getElementById('newTruckPlateNumber').value;
+        let tires = document.getElementById('newTruckTiresCondition').value.split(' ').map(Number);
+
+        if (!objOfTrucks.hasOwnProperty(plate)) {
+            objOfTrucks[plate] = {
+                "tires": tires
+            };
+            let secondElem = fieldsets[4].children[1];
+            let newDivElem = createTrucksElem("div", "truck", plate);
+            secondElem.parentNode.insertBefore(newDivElem, secondElem.nextSibling);
+        }
+    };
+
+    function addNewTires() {
+        let newTires = document.getElementById('newTiresCondition').value.split(' ');
+        backupTires.push(newTires);
+
+        let secondElem = fieldsets[3].children[1];
+        let newDivElem = createTrucksElem("div", "tireSet", newTires.join(' '));
+        secondElem.parentNode.insertBefore(newDivElem, secondElem.nextSibling);
+    };
+
+    function goToWork() {
+        let plateToWork = document.getElementById('workPlateNumber').value;
+        let distanceToWork = Number(document.getElementById('distance').value);
+
+        if (objOfTrucks.hasOwnProperty(plateToWork)) {
+            let checkDistance = distanceToWork / 1000;
+            let tiresCondition = objOfTrucks[plateToWork].tires.some((x) => x < checkDistance);
+            console.log(tiresCondition);
+            objOfTrucks[plateToWork]["distance"] = 0;
+            if (!tiresCondition) {
+                objOfTrucks[plateToWork].distance += distanceToWork;
+                objOfTrucks[plateToWork].tires.forEach(function (element, idx, arr) {
+                    arr[idx] = element - checkDistance;
+                });
+            } else {
+                if (backupTires.length > 0) {
+                    let changedTires = backupTires.shift();
+                    if (!changedTires.some((x) => x < checkDistance)){
+                        bjOfTrucks[plateToWork].tires = changedTires;
+                        bjOfTrucks[plateToWork].distance += distanceToWork;
+                    }
+                }
+
+            }
+        }
+    };
+
+    function endOfTheShift() {
+
+    };
+
+    function createTrucksElem(type, className, plateNumber) {
+        let newDiv = document.createElement(type);
+        newDiv.textContent = plateNumber;
+        newDiv.classList.add(className);
+        return newDiv;
+    }
 
 
 
