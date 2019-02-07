@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>FromJSONToHTMLTable</title>
+    <style>
+        table,
+        th {
+            border: groove;
+            border-collapse: collapse;
+        }
+        
+        td {
+            border: 1px solid black;
+        }
+        
+        td,
+        th {
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrapper">
+    </div>
+    <script>
+        function fromJSONToHTMLTable(input) {
+            let inputArr = JSON.parse(input);
+            let objKeysArr = Object.keys(inputArr[0]);
+
+            let result = "";
+            result += "<table>\n";
+            result += "   <tr>";
+            for (let i = 0; i < objKeysArr.length; i++) {
+                result += `<th>${objKeysArr[i]}</th>`;
+            }
+            result += "</tr>\n";
+            inputArr.forEach(element => {
+                result += "   <tr>";
+                for (let i = 0; i < objKeysArr.length; i++) {
+                    result += `<td>${HtmlEncode(element[objKeysArr[i]])}</td>`;
+                }
+                result += "</tr>\n";
+            });
+            result += "</table>";
+
+            function HtmlEncode(mystring) {
+                let resultStr = "";
+                let pattern = /['&<>"]/g;
+                let currMatch;
+
+                if ((currMatch = pattern.exec(mystring)) !== null) {
+                    resultStr = mystring.replace(/&/g, "&amp;")
+                        .replace(/>/g, "&gt;")
+                        .replace(/</g, "&lt;")
+                        .replace(/"/g, "&quot;")
+                        .replace(/'/g, "&#39;");
+                } else {
+                    resultStr = mystring
+                }
+
+                return resultStr;
+            };
+            return result;
+        };
+
+        window.onload = function () {
+            let container = document.getElementById('wrapper');
+            container.innerHTML = fromJSONToHTMLTable(['[{"Name":"Pesho <div>-a","Age":20,"City":"Sofia"},{"Name":"Gosho","Age":18,"City":"Plovdiv"},{"Name":"Angel","Age":18,"City":"Veliko Tarnovo"}]']);
+        };
+    </script>
+</body>
+
+</html>
