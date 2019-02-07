@@ -15,19 +15,19 @@ function solve() {
 
         if (!objOfTrucks.hasOwnProperty(plate)) {
             objOfTrucks[plate] = {
-                "tires": tires
+                "tires": tires,
+                "distance": 0
             };
-            let secondElem = fieldsets[4].children[1];
+            let secondElem = fieldsets[4].lastChild;
             let newDivElem = createTrucksElem("div", "truck", plate);
             secondElem.parentNode.insertBefore(newDivElem, secondElem.nextSibling);
         }
     };
 
     function addNewTires() {
-        let newTires = document.getElementById('newTiresCondition').value.split(' ');
+        let newTires = document.getElementById('newTiresCondition').value.split(' ').map(Number);
         backupTires.push(newTires);
-
-        let secondElem = fieldsets[3].children[1];
+        let secondElem = fieldsets[3].lastChild;
         let newDivElem = createTrucksElem("div", "tireSet", newTires.join(' '));
         secondElem.parentNode.insertBefore(newDivElem, secondElem.nextSibling);
     };
@@ -39,8 +39,7 @@ function solve() {
         if (objOfTrucks.hasOwnProperty(plateToWork)) {
             let checkDistance = distanceToWork / 1000;
             let tiresCondition = objOfTrucks[plateToWork].tires.some((x) => x < checkDistance);
-            console.log(tiresCondition);
-            objOfTrucks[plateToWork]["distance"] = 0;
+
             if (!tiresCondition) {
                 objOfTrucks[plateToWork].distance += distanceToWork;
                 objOfTrucks[plateToWork].tires.forEach(function (element, idx, arr) {
@@ -49,18 +48,27 @@ function solve() {
             } else {
                 if (backupTires.length > 0) {
                     let changedTires = backupTires.shift();
-                    if (!changedTires.some((x) => x < checkDistance)){
-                        bjOfTrucks[plateToWork].tires = changedTires;
-                        bjOfTrucks[plateToWork].distance += distanceToWork;
+                    if (!changedTires.some((x) => x < checkDistance)) {
+                        objOfTrucks[plateToWork].tires.forEach(function (element, idx, arr) {
+                            arr[idx] = changedTires[idx] - checkDistance;
+                        });
+                        objOfTrucks[plateToWork].distance += distanceToWork;
+                    } else {
+                        objOfTrucks[plateToWork].tires = changedTires;
                     }
+                    let backupTiresDiv = fieldsets[3].children[2];
+                    fieldsets[3].removeChild(backupTiresDiv);
                 }
-
             }
         }
     };
 
     function endOfTheShift() {
-
+        let textareaElem = document.getElementsByTagName('textarea')[0];
+        for (const plNumb in objOfTrucks) {
+            textareaElem.value += `Truck ${plNumb} has traveled ${objOfTrucks[plNumb].distance}.\n`;
+        }
+        textareaElem.value += `You have ${backupTires.length} sets of tires left.\n`;
     };
 
     function createTrucksElem(type, className, plateNumber) {
@@ -69,13 +77,6 @@ function solve() {
         newDiv.classList.add(className);
         return newDiv;
     }
-
-
-
-
-
-
-
 
     // let buttons = document.getElementsByTagName('button');
     // let fieldSets = document.getElementsByTagName('fieldset');
