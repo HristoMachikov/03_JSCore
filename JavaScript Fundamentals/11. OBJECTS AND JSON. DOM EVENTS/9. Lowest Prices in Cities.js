@@ -1,56 +1,29 @@
 function solve(inputArr) {
     let obj = {};
-    let productArr = [];
+
     inputArr.forEach(element => {
         let currTownInfo = element.split(" | ");
         let currTown = currTownInfo[0].trim();
         let currProduct = currTownInfo[1].trim();
         let currProductPrice = Number(currTownInfo[2].trim());
-
-        if (!obj.hasOwnProperty(currTown)) {
-            obj[currTown] = {};
-            obj[currTown][currProduct] = currProductPrice;
-            productArr.push(currProduct);
+        if (!obj.hasOwnProperty(currProduct)) {
+            obj[currProduct] = {};
+            obj[currProduct][currTown] = currProductPrice;
         } else {
-            if (!obj[currTown].hasOwnProperty(currProduct)) {
-                obj[currTown][currProduct] = currProductPrice;
-                productArr.push(currProduct);
+            if (!obj[currProduct].hasOwnProperty(currTown)) {
+                obj[currProduct][currTown] = currProductPrice;
+
             } else {
-                obj[currTown][currProduct] = currProductPrice;
+                obj[currProduct][currTown] = currProductPrice;
             }
         };
     });
-console.log(productArr)
-    productArr.forEach(product => {
-        let lowestPrice = Number.MAX_VALUE;
-        let currTown = "";
-        Object.keys(obj).forEach((key) => {
-            // console.log(`Town - ${key}`);
-            //Object.keys(obj[key]).forEach((product) => {
-                // console.log(key)
-            if (Object.keys(obj[key]).hasOwnProperty(product)) {
-                // console.log(obj[key]);
-                // console.log(product);
-                if (obj[key][product] < lowestPrice) {
-                    lowestPrice = obj[key][product];
-                    currTown = key;
-                }
 
-            }
-            //console.log(`$$$${product} : ${obj[key][product]}`);
-            //});
-        });
-  
-            console.log(`${product} -> ${lowestPrice}} (${currTown})`);
-        
+    Object.keys(obj).forEach((key) => {
+        let sortedObjArr = Object.keys(obj[key]).sort((a, b) => obj[key][a] - obj[key][b]);
+        let firstProp = sortedObjArr[0];
+        console.log(`${key} -> ${obj[key][firstProp]} (${firstProp})`);
     });
-
-    // Object.keys(obj).forEach((key) => {
-    //     console.log(`Town - ${key}`);
-    //     Object.keys(obj[key]).forEach((product) => {
-    //         console.log(`$$$${product} : ${obj[key][product]}`);
-    //     });
-    // });
 };
 solve(["Sample Town | Sample Product | 1000"
     , "Sample Town | Orange | 2"

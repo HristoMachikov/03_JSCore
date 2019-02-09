@@ -1,0 +1,7 @@
+document.querySelector(".game-start") хваща класа
+
+event.code
+window.requestAnimationFrame(gameAction)
+timestand брой времето от извикване на функцията
+fireball.parentNode.removeChild(fireball)
+getBoundingClientElement()
