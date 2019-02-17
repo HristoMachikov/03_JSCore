@@ -1,0 +1,7 @@
+ctrl+D или F2
+
+const assert= require('chai').assert
+const expect = require('chai').expect 
+const subSum = require('./1.SubSum')
+
+npm install -g mocha
