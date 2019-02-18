@@ -19,4 +19,4 @@ function solve(examPonts, homeworkCompleted, totalHomework) {
     }
     console.log(grade.toFixed(2));
 };
-solve(350, 10, 10);
+solve(270, 10, 10);
