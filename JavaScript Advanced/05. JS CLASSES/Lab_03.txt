@@ -1,0 +1,41 @@
+Функцията се закача към неиния прототип(prototayp на обекта)
+
+преди es6
+function Rectangle(wight, height) {
+ this.wight = wight
+ this.height = height
+}
+
+аксесора гетър(get) е пропарти на класа
+валидация на данни се прави през сетъра(set) 
+
+когато се дефинират пропартита минават през get
+
+kogato se promenqt минават през set
+
+при наследяване
+extends - закача за прототипа на новия клас всички методи
+super - закача за прототипа на новия клас всички propatrty-та
+при абстракция
+абстрактен клас не се инстанцира само се наследява
+пише се проверка в конструктура
+if(new.target === Person){
+throw new Error ("Abstract class");
+}
+
+mocha test exploler
+module.exports = {StringBuilder, Person}
+
+--Constructur
+---Can be instantiated with a passed in string 
+---Can be instantiated without a passed in string 
+--Append
+---test if the param is a string(if not throw error)
+---test with correct information
+--Prepend
+---test with correct information
+--Insert at
+---test if the param is a string(if not throw error)
+--- test with a string
+--- test with a single character
+--Remove

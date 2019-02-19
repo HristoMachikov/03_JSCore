@@ -11,19 +11,20 @@ describe("Math Enforcer", function () {
         it("with floating point number param, should return correct result", function () {
             expect(mathEnforcer.addFive(8.75)).to.be.equal(13.75);
         });
-        // it("with Null param, should return undefined", function () {
-        //     expect(mathEnforcer.addFive(null)).to.be.equal(undefined);
-        // });
+        it("with negative number param, should return correct result", function () {
+            expect(mathEnforcer.addFive(-8)).to.be.equal(-3);
+        });
+        it("with negative floating point number param, should return correct result", function () {
+            expect(mathEnforcer.addFive(-18.75)).to.be.equal(-13.75);
+        });
         it("with Not a number param, should return undefined", function () {
             let notNumb = "hi";
             expect(mathEnforcer.addFive(notNumb)).to.be.equal(undefined);
-            //assert.isNotNumber(mathEnforcer.addFive(notNumb), undefined)
         });
         it("with an object param, should return undefined", function () {
             let object = { name: "Pesho" };
             let expected = mathEnforcer.addFive(object);
             expect(expected).to.be.equal(undefined);
-            //assert.isNotNumber(mathEnforcer.addFive(notNumb), undefined)
         });
     });
     describe('subtractTen Key', function () {
@@ -33,14 +34,15 @@ describe("Math Enforcer", function () {
         it("with floating point number param, should return correct result", function () {
             expect(mathEnforcer.subtractTen(18.75)).to.be.equal(8.75);
         });
-   
-        // it("with Null param, should return undefined", function () {
-        //     expect(mathEnforcer.subtractTen(null)).to.be.equal(undefined);
-        // });
+        it("with negative number param, should return correct result", function () {
+            expect(mathEnforcer.subtractTen(-20)).to.be.equal(-30);
+        });
+        it("with negative floating point number param, should return correct result", function () {
+            expect(mathEnforcer.subtractTen(-18.75)).to.be.equal(-28.75);
+        });
         it("with Not a number param, should return undefined", function () {
             let notNumb = "hi";
             expect(mathEnforcer.subtractTen(notNumb)).to.be.equal(undefined);
-            //assert.isNotNumber(mathEnforcer.subtractTen(notNumb), undefined)
         });
         it("with an object param, should return undefined", function () {
             let object = { name: "Pesho" };
@@ -61,19 +63,13 @@ describe("Math Enforcer", function () {
         it("with second floating point param, should return correct result", function () {
             expect(mathEnforcer.sum(20, 12.2)).to.be.equal(32.2);
         });
-  
+
         it("with first Not a number param, should return undefined", function () {
             let notNumb1 = "hi1";
             let notNumb2 = 3;
             expect(mathEnforcer.sum(notNumb1, notNumb2)).to.be.equal(undefined);
-            //assert.isNotNumber(mathEnforcer.sum(notNumb1, notNumb2), undefined)
         });
-        // it("with first Not a number param, should return undefined", function () {
-        //     let notNumb1 = "hi1";
-        //     let notNumb2 = 3;
-        //     let expecterd = mathEnforcer.sum(notNumb1, notNumb2);
-        //     expect(expecterd).to.be.equal(undefined);
-        // });
+
         it("with second Not a number param, should return undefined", function () {
             let notNumb1 = 3;
             let notNumb2 = "hi2";
@@ -92,17 +88,5 @@ describe("Math Enforcer", function () {
             let expecterd = mathEnforcer.sum(notNumb1, notNumb2);
             expect(expecterd).to.be.equal(undefined);
         });
-        // it("with first Not a number param, should return correct result", function () {
-        //     let notNumb1 = 3;
-        //     let notNumb2 = parseInt("1");
-        //     let expecterd = mathEnforcer.sum(notNumb1, notNumb2);
-        //     expect(expecterd).to.be.equal(4);
-        // });
-        // it("with second Not a number param, should return correct result", function () {
-        //     let notNumb1 = parseInt('3');
-        //     let notNumb2 = 2;
-        //     let expecterd = mathEnforcer.sum(notNumb1, notNumb2);
-        //     expect(expecterd).to.be.equal(5);
-        // });
     });
 })

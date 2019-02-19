@@ -1,45 +1,42 @@
 function validateRequest(request) {
-    let urlRegExp = /^([\w.]+)$/gm;
-    let msgRegExp = /^([^"&\\'<>]+)$/gm;
+    let uriRegExp = /^([\w.]+)$/g;
+    let msgRegExp = /^([^<>\\&'"]+)$/g;
     let validMethod = false;
     let validURI = false;
     let validVersion = false;
-    let messageVersion = false;
+    let validMessage = false;
 
     if (request.hasOwnProperty('method')) {
-        if (!methodValidation(request)) {
-            return `Invalid request header: Invalid Method`;
+        validMethod = methodValidation(request);
+        if (!validMethod) {
+            printErrorMessages("Method");
         }
     } else {
-        return `Invalid request header: Invalid Method`;
+        printErrorMessages("Method");
     }
     if (request.hasOwnProperty('uri')) {
-        if (!uriValidation(request)) {
-            return `Invalid request header: Invalid URI`;
+        validURI = uriValidation(request)
+        if (!validURI) {
+            printErrorMessages("URI");
         }
     } else {
-        return `Invalid request header: Invalid URI`;
+        printErrorMessages("URI");
     }
     if (request.hasOwnProperty('version')) {
-        if (!versionValidation(request)) {
-            return `Invalid request header: Invalid Version`;
+        validVersion = versionValidation(request)
+        if (!validVersion) {
+            printErrorMessages("Version");
         }
     } else {
-        return `Invalid request header: Invalid Version`;
+        printErrorMessages("Version");
     }
     if (request.hasOwnProperty('message')) {
-        if (!messageValidation(request)) {
-            return `Invalid request header: Invalid Message`;
+        validMessage = messageValidation(request)
+        if (!validMessage) {
+            printErrorMessages("Message");
         }
     } else {
-        return `Invalid request header: Invalid Message`;
-    }
-
-    if (validMethod &&
-        validURI &&
-        validVersion &&
-        messageVersion) {
-        return request;
+        printErrorMessages("Message");
     }
 
     function methodValidation(request) {
@@ -51,14 +48,14 @@ function validateRequest(request) {
             validMethod = true;
         }
         return validMethod;
-    };
+    }
     function uriValidation(request) {
         validURI = false;
-        if (urlRegExp.test(request.uri)) {
+        if (uriRegExp.test(request.uri) || request.uri === "*") {
             validURI = true;
         }
         return validURI;
-    };
+    }
     function versionValidation(request) {
         validVersion = false;
         if (request.version === "HTTP/0.9" ||
@@ -68,20 +65,26 @@ function validateRequest(request) {
             validVersion = true;
         }
         return validVersion;
-    };
+    }
     function messageValidation(request) {
-        messageVersion = false;
+        validMessage = false;
         if (msgRegExp.test(request.message) || request.message === "") {
-            messageVersion = true;
+            validMessage = true;
         }
-        return messageVersion;
-    };
-};
+        return validMessage;
+    }
+    function printErrorMessages(msg) {
+        throw new Error(`Invalid request header: Invalid ${msg}`);
+    }
+    if (validMethod && validURI && validVersion && validMessage) {
+        return request;
+    }
+}
 
 console.log(validateRequest({
     method: 'GET',
     uri: 'svn.public.catalog',
-    version: 'HTTP/1.1',
+    version: 'HTTP/0.9',
     message: ''
 }));
 
