@@ -81,6 +81,7 @@ function validateRequest(request) {
     }
 }
 
+
 console.log(validateRequest({
     method: 'GET',
     uri: 'svn.public.catalog',

@@ -2,7 +2,6 @@ const expect = require('chai').expect;
 const mathEnforcer = require('./4.MathEnforcer');
 const assert = require('chai').assert;
 
-
 describe("Math Enforcer", function () {
     describe('addFive Key', function () {
         it("with number param, should return correct result", function () {
