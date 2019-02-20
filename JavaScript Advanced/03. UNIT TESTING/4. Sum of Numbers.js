@@ -4,4 +4,6 @@ function sum(arr) {
         sum += Number(num);
     return sum;
 }
+//let obj = {name:"Pesho"}
+console.log(sum([]))
  module.exports = sum;

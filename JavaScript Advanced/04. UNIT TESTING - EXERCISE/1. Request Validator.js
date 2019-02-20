@@ -61,7 +61,7 @@ function validateRequest(request) {
         if (request.version === "HTTP/0.9" ||
             request.version === "HTTP/1.0" ||
             request.version === "HTTP/1.1" ||
-            request.version === "HTTP/1.2") {
+            request.version === "HTTP/2.0") {
             validVersion = true;
         }
         return validVersion;
@@ -80,7 +80,11 @@ function validateRequest(request) {
         return request;
     }
 }
-
+console.log(validateRequest({
+    method: 'POST',
+    uri: 'home.bash',
+    version: 'HTTP/2.0'
+}));
 
 console.log(validateRequest({
     method: 'GET',
