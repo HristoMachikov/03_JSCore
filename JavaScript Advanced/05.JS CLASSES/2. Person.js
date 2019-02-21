@@ -6,6 +6,9 @@ class Person {
         this.email = email
     }
     toString() {
-        return `${this.firstName} ${this.lastName} (age:${this.age} email:${this.email})`
+        return `${this.firstName} ${this.lastName} (age: ${this.age}, email: ${this.email})`;
     }
 }
+
+let firstPerson = new Person('Maria', 'Petrova', 22, 'mp@yahoo.com');
+console.log(firstPerson.toString());

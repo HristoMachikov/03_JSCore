@@ -10,3 +10,4 @@ class Rectangle {
 }
 let rect = new Rectangle(4, 5, 'red');
 console.log(rect.calcArea());
+console.log(rect.color);

@@ -1,9 +1,12 @@
-Функцията се закача към неиния прототип(prototayp на обекта)
+Функцията се закача към неиния прототип(prototype на обекта)
 
-преди es6
-function Rectangle(wight, height) {
- this.wight = wight
+преди ES2015 (ES6)
+function Rectanglethis.width height) {
+ this.width = this.width 
  this.height = height
+}
+Rectangle.prototype.area = function () {
+  return this.width * this.height;
 }
 
 аксесора гетър(get) е пропарти на класа
