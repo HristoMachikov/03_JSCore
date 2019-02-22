@@ -1,0 +1,20 @@
+let town = { name, population, country };
+когато пропартито съвпада с валуто пишем новия съкратен вариант
+
+Object.setPrototypeOf(pesho,paul);
+let me = Object.create(pesho)
+console.log(me.__proto__.__proto__) //paul извикваме прототипа 
+Object.getPrototypeOf(fatherCar)     извикваме прототипа 
+
+накрая прототипа на висички е обект
+
+през prototype достигаме прот. на функцията които е обект
+функцията дава прототипа за ползване чрез prototypa
+
+Всяка функция има собствен прототип
+
+Student
+
+fore in минава през пропартитана и на прототипа (prototype chain)
+
+

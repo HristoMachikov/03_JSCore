@@ -34,4 +34,7 @@ let obj3 = new Extensible();
 console.log(obj1.id);
 console.log(obj2.id);
 console.log(obj3.id);
-console.log(obj3.extend().prototype);
+for (const obj in obj3.constructor.prototype){
+    console.log(type(obj))
+}
+//console.log(obj3.constructor.prototype);
