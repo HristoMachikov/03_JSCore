@@ -16,6 +16,8 @@ Rectangle.prototype.area = function () {
 
 kogato se promenqt минават през set
 
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain
+
 при наследяване
 extends - закача за прототипа на новия клас всички методи
 super - закача за прототипа на новия клас всички propatrty-та

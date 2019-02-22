@@ -5,12 +5,12 @@ class SortedList {
     }
 
     add(element) {
-        // if (!isNaN(element) && element % element == 0) {
-        this.list.push(element);
-        this.size++;
-        this.list.sort((a, b) => a - b);
-        return this.list;
-        //}
+       // if (!isNaN(element) && element % element == 0) {
+            this.list.push(element);
+            this.size++;
+            this.list.sort((a, b) => a - b);
+            return this.list;
+      //  }
     }
 
     remove(index) {
@@ -34,4 +34,8 @@ list.add(1)
 list.remove(1)
 list.add({})
 list.add({})
+list.add(NaN)
+list.add('Hello')
+list.add([() => { 1 }, () => { 2 }, () => { 3 }])
 console.log(list.size)
+console.log(list.get(6))
