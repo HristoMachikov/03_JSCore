@@ -1,40 +1,33 @@
-let Extensible = (function () {
+(function () {
     let count = 0;
-    return class {
+    return class Extensible {
         constructor() {
-            this.__proto__ = {}
             this.id = count++;
         }
         extend(template) {
-            return class {
-                constructor() {
-                    
+            for (let property in template) {
+                if (typeof (property) === "function") {
+                    this.prototype[property] = template[property]
+                    //Object.getPrototypeOf(this).property = template[property]
+                } else {
+                    this[property] = template[property];
                 }
             }
-            if (typeof (template) === "function") {
-
-            }
-
         }
-        // get id(){
-        //     console.log('get')
-        //     return this._id;
-        // }
-        // set id(id){
-        //     console.log('set')
-        //     return this._id++;
-        // }
     }
-})();
+})()
 
 let obj1 = new Extensible();
 let obj2 = new Extensible();
 let obj3 = new Extensible();
-
+obj1.extensionProperty = "someString";
+console.log(obj1.__proto__);
+obj2[extend](obj1);
 console.log(obj1.id);
 console.log(obj2.id);
 console.log(obj3.id);
-for (const obj in obj3.constructor.prototype){
-    console.log(type(obj))
-}
+console.log(obj1);
+console.log(obj2);
+console.log(obj3);
+
 //console.log(obj3.constructor.prototype);
