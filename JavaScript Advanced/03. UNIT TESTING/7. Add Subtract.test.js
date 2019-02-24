@@ -2,7 +2,7 @@ const assert = require('chai').assert;
 const expect = require('chai').expect;
 const createCalculator = require('./7. Add Subtract');
 
-describe.only("Create Calculator", function () {
+describe("Create Calculator", function () {
     let calculator;
     beforeEach(function () {
         calculator = createCalculator();
