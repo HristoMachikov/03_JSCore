@@ -1,25 +1,29 @@
 function solve(inputObj) {
-    let weight = function () {
-        return inputObj[weight];
+    let currWeight = function () {
+        return inputObj.weight;
     };
-    let experience = 0;
-    let bloodAlcoholLevel = 0;
-    let handsShaking = function () {
-        return inputObj[experience];
+    let currExperience = function () {
+        return inputObj.experience
     };
+    let currBloodAlcoholLevel = inputObj.bloodAlcoholLevel;
+    let currHandsShaking = inputObj.handsShaking;
 
-    if(handsShaking() === true){
-
+    if (currHandsShaking) {
+        currBloodAlcoholLevel += currExperience() * currWeight() * 0.1;
+        currHandsShaking = false;
     }
-    
 
-    return { weight, experience, bloodAlcoholLevel, handsShaking };
+    return {
+        weight: currWeight(),
+        experience: currExperience(),
+        bloodAlcoholLevel: currBloodAlcoholLevel,
+        handsShaking: currHandsShaking
+    };
 }
-
-solve({
-    weight: 80,
-    experience: 1,
+console.log(solve({
+    weight: 95,
+    experience: 3,
     bloodAlcoholLevel: 0,
-    handsShaking: true
+    handsShaking: false
 }
-)
+));
