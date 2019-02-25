@@ -77,6 +77,17 @@ describe("Warehouse", function () {
         })
     })
 
+
+    //ADD PRODUCT
+    describe("addProduct", function () {
+        it('with smaller than capacity, quantity should pass correct', function () {
+            wh = new Warehouse(20);
+            let result = { 'Tomatos': "30" };
+            wh.capacity += 20;
+            wh.addProduct('Food', 'Tomatos', 14)
+            expect(wh.addProduct('Food', 'Tomatos', 16)).to.be.equal(result, "The added quantity is bigger than capacity!");
+        })
+    })
     //REVISION
     describe('revision', function () {
         it('with number param should pass correct', function () {
