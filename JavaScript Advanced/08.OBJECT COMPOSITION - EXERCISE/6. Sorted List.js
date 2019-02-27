@@ -6,19 +6,17 @@ function sortedList() {
             list.push(element);
             list.sort((a, b) => a - b)
             this.size++;
-            return
         };
         const remove = function (index) {
-            if (this.list.length > index && index >= 0) {
-                this.list.splice(index, 1);
+            if (list.length > index && index >= 0) {
+                list.splice(index, 1);
                 this.size--;
-                return this.list;
             }
         };
 
-        let get = function (index) {
-            if (this.list.length > index && index >= 0) {
-                return this.list[index];
+        const get = function (index) {
+            if (list.length > index && index >= 0) {
+                return list[index];
             }
         };
 

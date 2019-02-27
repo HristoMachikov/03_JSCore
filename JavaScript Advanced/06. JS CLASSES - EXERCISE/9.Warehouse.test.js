@@ -2,11 +2,11 @@ const Warehouse = require('./9.Warehouse.js');
 const expect = require("chai").expect;
 const assert = require("chai").assert;
 
-describe("Warehouse", function () {
+describe.only("Warehouse", function () {
     let wh;
-    beforeEach(function () {
-        wh = new Warehouse(20);
-    });
+    // beforeEach(function () {
+    //     wh = new Warehouse(20);
+    // });
 
     // it('with own property "constructor" should pass correct', function () {
     //     wh = new Warehouse(20);
@@ -80,20 +80,118 @@ describe("Warehouse", function () {
 
     //ADD PRODUCT
     describe("addProduct", function () {
+        beforeEach(function () {
+            wh = new Warehouse(20);
+        });
         it('with smaller than capacity, quantity should pass correct', function () {
             wh = new Warehouse(20);
-            let result = { 'Tomatos': "30" };
-            wh.capacity += 20;
-            wh.addProduct('Food', 'Tomatos', 14)
-            expect(wh.addProduct('Food', 'Tomatos', 16)).to.be.equal(result, "The added quantity is bigger than capacity!");
+            let result = { Tomatos: 50 };
+            wh.capacity += 30;
+            let expected = wh.addProduct('Food', 'Tomatos', 50);
+            expect(expected).to.deep.equal(result, "The added quantity is bigger than capacity!");
         })
+        it('when try to add bigger than capacity quantity should trow error', function () {
+            wh = new Warehouse(20);
+            wh.capacity += 30;
+            expect(() => wh.addProduct('Food', 'Tomatos', 51)).to.throw('There is not enough space or the warehouse is already full');
+        })
+
+    })
+    //ORDER PRODUCTS
+    //
+
+
+    describe("orderProducts", function () {
+        // let wh;
+        // beforeEach(function () {
+        //     wh = new Warehouse(20);
+        // });
+        it('with smaller than capacity, quantity should sort "Food" correct', function () {
+            wh = new Warehouse(20);
+            let result = { Tomatos: 5, Apples: 5, Cucumbers: 2 };
+
+            wh.addProduct('Food', 'Cucumbers', 2);
+            wh.addProduct('Food', 'Tomatos', 5);
+            wh.addProduct('Food', 'Apples', 5);
+            expect(wh.orderProducts('Food')).to.deep.equal(result, "The added product are not sorted!");
+        })
+        it('with smaller than capacity, quantity should sort "Drink" correct', function () {
+            wh = new Warehouse(20);
+            let result = { Voda: 5, Juce: 3, Beer: 2 };
+
+            wh.addProduct('Drink', 'Beer', 2);
+            wh.addProduct('Drink', 'Voda', 5);
+            wh.addProduct('Drink', 'Juce', 3);
+            expect(wh.orderProducts('Drink')).to.deep.equal(result, "The added product are not sorted!");
+        })
+        it('with equal to 0 quantity should sort "Drink" correct', function () {
+            wh = new Warehouse(20);
+            let result = {};
+            expect(wh.orderProducts('Drink')).to.deep.equal(result, "The added product are not sorted!");
+            expect(wh.orderProducts('Food')).to.deep.equal(result, "The added product are not sorted!");
+        })
+        it('with different from "Food" and "Drink" type should be undefined', function () {
+            wh = new Warehouse(20);
+            expect(() => wh.orderProducts('Desert')).to.throw(TypeError);
+        })
+    })
+    //
+    //OCCUPIED CAPACITY
+    describe("occupiedCapacity", function () {
+        // let wh;
+        // beforeEach(function () {
+        //     wh = new Warehouse(20);
+        // });
+        it('with smaller than capacity, quantity should pass correct', function () {
+            wh = new Warehouse(20);
+            wh.addProduct('Drink', 'Beer', 2);
+            wh.addProduct('Drink', 'Voda', 5);
+            wh.addProduct('Drink', 'Juce', 3);
+            wh.addProduct('Drink', 'Juce', 3);
+            wh.addProduct('Food', 'Cucumbers', 2);
+            wh.addProduct('Food', 'Tomatos', 5);
+            wh.capacity += 30;
+            wh.addProduct('Food', 'Apples', 5);
+            expect(wh.occupiedCapacity()).to.be.equal(25, "The added quantity is bigger than capacity!");
+        })
+        it('with smaller than capacity, zero quantity should pass correct', function () {
+            wh = new Warehouse(20);
+            expect(wh.occupiedCapacity()).to.be.equal(0, "The added quantity is bigger than capacity!");
+        })
+
     })
     //REVISION
     describe('revision', function () {
-        it('with number param should pass correct', function () {
+
+        beforeEach(function () {
             wh = new Warehouse(20);
+        });
+        it('with number param should pass correct', function () {
+            // wh = new Warehouse(20);
             //let result = resultStr(wh.availableProducts,wh.occupiedCapacity());
             expect(wh.revision()).to.be.equal('The warehouse is empty', "The result string is wrong!")
+        })
+
+        it('with at least 1 product in the warehouse should pass correct', function () {
+            // wh = new Warehouse(20);
+            wh.addProduct('Food', 'Tomatos', 5);
+            let result = "Product type - [Food]\n";
+            result += "- Tomatos 5\n";
+            result += "Product type - [Drink]";
+            expect(wh.revision()).to.deep.equal(result, "Can not print all products of each type!")
+        })
+        it('with at more than 1 product in the warehouse should pass correct', function () {
+            // wh = new Warehouse(20);
+
+            wh.addProduct('Drink', 'Juce', 3);
+            wh.addProduct('Food', 'Cucumbers', 2);
+            wh.addProduct('Food', 'Tomatos', 5);
+            let result = "Product type - [Food]\n";
+            result += "- Cucumbers 2\n";
+            result += "- Tomatos 5\n";
+            result += "Product type - [Drink]\n";
+            result += "- Juce 3";
+            expect(wh.revision()).to.deep.equal(result, "Can not print all products of each type!")
         })
     })
 
