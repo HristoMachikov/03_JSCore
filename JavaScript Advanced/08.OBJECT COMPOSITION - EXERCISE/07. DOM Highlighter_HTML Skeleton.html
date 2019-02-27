@@ -9,54 +9,54 @@
             width: 800px;
             overflow: hidden;
         }
-
+        
         #header {
             font-size: 300%;
             font-weight: bold;
         }
-
+        
         #menu {
             background-color: darkgrey;
             padding: 0.5em;
         }
-
+        
         #menu a {
             margin-left: 1em;
             margin-right: 1em;
         }
-
+        
         #content {
             width: 500px;
             float: left;
         }
-
+        
         .article {
             padding: 2em
         }
-
+        
         .article .title {
             font-size: 150%
         }
-
+        
         #sidebar {
             width: 250px;
             float: right;
             background-color: lightgray;
         }
-
+        
         #footer {
             text-align: center;
             clear: both;
             height: 5em;
             background-color: darkgrey;
         }
-
+        
         .highlight {
             border: 1px solid red;
             background-color: pink;
         }
     </style>
-    <script src="./7. DOM Traversal.js" defer></script>
+    <script src="./7. DOM Traversal.js"></script>
 </head>
 
 <body>
@@ -74,9 +74,10 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque blandit lobortis orci non vestibulum.
                         Nullam cursus, odio id tincidunt posuere, dui elit dictum diam, in lacinia nisi nibh a tortor. Aliquam
                         suscipit sollicitudin purus quis suscipit. Aliquam ultrices ipsum neque, sit amet sodales
-                        <span>libero sodales</span> sollicitudin. Vivamus molestie, augue nec aliquam lobortis, ipsum orci tempor
-                        ex, sit amet faucibus dolor est dictum lacus. Nam blandit interdum luctus. Maecenas at cursus urna,
-                        sed elementum nunc. In faucibus eget augue nec porta. Maecenas euismod mi ut ex scelerisque fermentum.
+                        <span>libero sodales</span> sollicitudin. Vivamus molestie, augue nec aliquam lobortis, ipsum orci
+                        tempor ex, sit amet faucibus dolor est dictum lacus. Nam blandit interdum luctus. Maecenas at cursus
+                        urna, sed elementum nunc. In faucibus eget augue nec porta. Maecenas euismod mi ut ex scelerisque
+                        fermentum.
                     </p>
                     <p>Suspendisse tempus justo vitae turpis maximus congue. Nullam faucibus mauris vel volutpat vehicula. Donec
                         blandit leo et urna commodo luctus. Nam sit amet risus vitae libero accumsan venenatis. Etiam id
@@ -113,7 +114,7 @@
         <div id="footer">Copyright</div>
     </div>
     <script>
-
+        solve('#content')
     </script>
 </body>
 
