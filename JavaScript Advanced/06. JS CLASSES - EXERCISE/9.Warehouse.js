@@ -1,10 +1,5 @@
 class Warehouse {
 
-    constructor(capacity) {
-        this.capacity = capacity;
-        this.availableProducts = { 'Food': {}, 'Drink': {} };
-    }
-
     get capacity() {
         return this._capacity;
     }
@@ -16,6 +11,11 @@ class Warehouse {
         } else {
             throw `Invalid given warehouse space`;
         }
+    }
+
+    constructor(capacity) {
+        this.capacity = capacity;
+        this.availableProducts = { 'Food': {}, 'Drink': {} };
     }
 
     addProduct(type, product, quantity) {
