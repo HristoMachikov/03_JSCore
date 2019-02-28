@@ -1,28 +1,4 @@
 class Kitchen {
-    // get budget() {
-    //     return this._budget;
-    // }
-    // set budget(value) {
-    //     return this._budget = value;
-    // }
-    // get menu() {
-    //     return this._menu;
-    // }
-    // set menu(value) {
-    //     return this._menu = value;
-    // }
-    // get productsInStock() {
-    //     return this._productsInStock;
-    // }
-    // set productsInStock(value) {
-    //     return this._productsInStock = value;
-    // }
-    // get actionsHistory() {
-    //     return this._actionsHistory;
-    // }
-    // set actionsHistory(value) {
-    //     return this._actionsHistory = value;
-    // }
 
     constructor(budget) {
         this.budget = budget
@@ -40,12 +16,8 @@ class Kitchen {
             if (currPrice <= this.budget) {
                 this.budget -= currPrice;
                 if (!this.productsInStock.hasOwnProperty(currName)) {
-                    this.productsInStock[currName] = {
-                        "quantity": 0,
-                        "price": 0
-                    }
-                    this.productsInStock[currName].quantity += Number(currQuantity);
-                    this.productsInStock[currName].price += Number(currPrice);
+                    this.productsInStock[currName] = 0
+                    this.productsInStock[currName] += Number(currQuantity);
                 }
                 currAction = `Successfully loaded ${currQuantity} ${currName}`;
             } else {
@@ -59,18 +31,10 @@ class Kitchen {
     addToMenu(meal, neededProducts, price) {
         if (!this.menu.hasOwnProperty(meal)) {
             this.menu[meal] = {
-                "ingredients": {},
-                "price": price
+                products: neededProducts,
+                price: price
             }
-            for (const ingredient of neededProducts) {
-                let currIngredient = ingredient.trim().split(' ');
-                let ingredientQuantity = Number(currIngredient.pop());
-                let ingredientName = currIngredient.join(' ');
-                if (!this.menu[meal].ingredients.hasOwnProperty(ingredientName)) {
-                    this.menu[meal].ingredients[ingredientName] = 0;
-                }
-                this.menu[meal].ingredients[ingredientName] += ingredientQuantity;
-            }
+
             return `Great idea! Now with the ${meal} we have ${Object.keys(this.menu).length} meals in the menu, other ideas?`;
         } else {
             return `The ${meal} is already in our menu, try something different.`;
@@ -83,7 +47,7 @@ class Kitchen {
             for (const key in this.menu) {
                 output.push(`${key} - $ ${this.menu[key].price}`)
             }
-            return output.join('\n').trim();
+            return output.join('\n') + '\n';
         } else {
             return `Our menu is not ready yet, please come later...`;
         }
@@ -91,16 +55,24 @@ class Kitchen {
 
     makeTheOrder(meal) {
         if (this.menu.hasOwnProperty(meal)) {
-            for (const ingredient in this.menu[meal].ingredients) {
-                if (this.productsInStock.hasOwnProperty(ingredient) &&
-                    this.productsInStock[ingredient].quantity >= this.menu[meal].ingredients[ingredient]) {
+            for (const ingredient of this.menu[meal].products) {
+                let currIngredient = ingredient.trim().split(' ');
+                let ingredientQuantity = Number(currIngredient.pop());
+                let ingredientName = currIngredient.join(' ');
+
+
+                if (this.productsInStock.hasOwnProperty(ingredientName) &&
+                    this.productsInStock[ingredientName] >= ingredientQuantity) {
                 } else {
                     return `For the time being, we cannot complete your order (${meal}), we are very sorry...`;
 
                 }
             }
-            for (const ingredient in this.menu[meal].ingredients) {
-                this.productsInStock[ingredient].quantity -= Number(this.menu[meal].ingredients[ingredient])
+            for (const ingredient of this.menu[meal].products) {
+                let currIngredient = ingredient.trim().split(' ');
+                let ingredientQuantity = Number(currIngredient.pop());
+                let ingredientName = currIngredient.join(' ');
+                this.productsInStock[ingredientName] -= ingredientQuantity;
             }
             this.budget += Number(this.menu[meal].price);
             return `Your order (${meal}) will be completed in the next 30 minutes and will cost you ${this.menu[meal].price}.`;
