@@ -1,0 +1,30 @@
+jquery developerMozila
+
+let $heading = jQuery('.heading') - raboti kato querrySelectorAll
+$ - конвенция за означаване на jquery елемент
+$heading.text() - getter
+$heading.text("Hi") - setter
+$heading.text((i,text) => i + '-' + text)
+$heading.html("Hi")
+
+$input.attr('value') - getter
+1 - $input.attr('value', 'another value!') - setter
+2 - $input.attr('value', (i, v) => {
+	console.log(i)
+	return
+	}) - setter
+3 - $input.attr({value: 'another value!',
+		type:"password"
+}) - setter
+
+$input.wrap('<div>class = ""</div>')
+
+ancer element - има defaut поведение
+input element - има defaut поведение
+button element - няма defaut поведение
+
+в capcher фазата не се изпълнява евента, в bubling фазата се изпълнява
+currentTarget e таргета до които е стигнал capchur-a
+
+eq(1) = [1]  връща jqueri elem
+

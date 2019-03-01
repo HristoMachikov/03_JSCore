@@ -1,0 +1,25 @@
+<h1>List of Items</h1>
+<ul id="items">
+    <li>First</li>
+    <li>Second</li>
+</ul>
+<input type="text" id="newItemText" />
+<input type="button" value="Add" onclick="addItem()">
+<script>
+    function addItem() {
+        let $text = $("#newItemText");
+        let $itemsList = $('#items')
+        let $listItem = $('<li>')
+        let $buttonDelete = $('<button>Delete</button>');
+
+        $listItem.text($text.val());
+        $itemsList.append($listItem)
+        $itemsList.append(buttonDelete)
+
+        function onButtonDeleteClick(e) {
+            $button = $(e.target) //btn elem karsnat kym jquery elem
+            $button.parent().remove()
+        }
+    }
+
+</script>
