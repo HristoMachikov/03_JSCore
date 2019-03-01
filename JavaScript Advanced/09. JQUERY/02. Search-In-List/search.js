@@ -1,9 +1,7 @@
 function search() {
     let searchedValue = $('#searchText').val();
-    console.log(searchedValue)
-    let towns = $('towns li'contains).toArray();
-    //for(let i=0; i<towns.length;i++){
-
-    }
-
+    let towns = $(`#towns li:contains("${searchedValue}")`);
+    $('#towns li').css("font-weight", "");
+    towns.css("font-weight", "bold");
+    $('#result').text(`${towns.length} matches found.`)
 }

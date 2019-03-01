@@ -1,35 +1,52 @@
 function validate() {
+	$('#company').on('click', isCompany)
+	$('#submit').on('click', checkData)
 
+	function isCompany() {
+		if ($('#companyInfo').css('display') === "none") {
+			$('#companyInfo').css('display', "block")
+		} else {
+			$('#companyInfo').css('display', "none")
+		}
+	}
 
+	function checkData(event) {
+		event.preventDefault();
 
-	function checkData() {
 		let username = $('#username')
 		let email = $('#email');
 		let password = $('#password');
-		let confirmPassword = $('#confir-password')
-		let pattern = /(.+)?@(.+)?\.(.+)?/g;
-		let cumpanyNumber = $('#cumpanyNumber')
+		let confirmPassword = $('#confirm-password')
+		let cumpanyNumber = $('#companyNumber')
+		let isValid = true;
 
-		if (!/[A-Za-z0-9]{3,20}/g.test(username.val())) {
+		let pattern = /^(.+)?@(.+)?\.(.+)?$/g;
+
+		if (!/^[A-Za-z0-9]{3,20}$/g.test(username.val())) {
 			username.css("border-color", "red")
+			isValid = false;
 		}
 		if (!pattern.test(email.val())) {
 			email.css("border-color", "red")
+			isValid = false;
 		}
-		if (!/^.{5,15}$/.test(password.val())) {
+		if (!/^\w{5,15}$/g.test(password.val())) {
 			password.css("border-color", "red")
+			isValid = false;
 		}
-		if (!/^.{5,15}$/.test(password.val()) || password.val() !== confirmPassword.val()) {
-			//password.css("border-color", "red")
+		if (!/^\w{5,15}$/g.test(confirmPassword.val()) || password.val() !== confirmPassword.val()) {
 			confirmPassword.css("border-color", "red");
+			password.css("border-color", "red")
+			isValid = false;
 		}
-
-		if (('#cumpanyInfo').css('display') === "block" &&
+		if ($('#companyInfo').css('display') === "block" &&
 			(cumpanyNumber.val() < 1000 || cumpanyNumber.val() > 9999)
 		) {
-			confirmPassword.css("border-color", "red");
+			cumpanyNumber.css("border-color", "red");
+			isValid = false;
 		}
-
-
+		if (isValid) {
+			$('#valid').css('display', "block")
+		}
 	}
 }
