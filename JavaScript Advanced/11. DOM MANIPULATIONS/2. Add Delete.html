@@ -1,3 +1,4 @@
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 <h1>List of Items</h1>
 <ul id="items">
     <li>First</li>
@@ -7,17 +8,28 @@
 <input type="button" value="Add" onclick="addItem()">
 <script>
     function addItem() {
-        let $text = $("#newItemText");
-        let $itemsList = $('#items')
-        let $listItem = $('<li>')
-        let $buttonDelete = $('<button>Delete</button>');
-
+        let $text = $('#newItemText');
+        let $itemsList = $('#items');
+        let $listItem = $('<li>');
         $listItem.text($text.val());
-        $itemsList.append($listItem)
-        $itemsList.append(buttonDelete)
+        $itemsList.append($listItem);
 
-        function onButtonDeleteClick(e) {
-            $button = $(e.target) //btn elem karsnat kym jquery elem
+        let $aTagDelete = $('<a href="#">[Delete]</a>');
+        $aTagDelete.on('click', onDeleteClick)
+        $listItem.append($aTagDelete)
+
+        let $li = $('li')
+        $li.each(function (i, e) {
+            let txt = $('li').eq(i).text();
+            let $aTag = $('<a href="#">[Delete]</a>');
+            if (!e.children.length) {
+
+                $('li').eq(i).append($aTag.on('click', onDeleteClick))
+            }
+        });
+
+        function onDeleteClick(e) {
+            $button = $(e.target)
             $button.parent().remove()
         }
     }
