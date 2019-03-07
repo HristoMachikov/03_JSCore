@@ -7,18 +7,22 @@ function dart() {
 		thirdLayer: 2,
 		fourthLayer: 3,
 		fifthLayer: 4,
-		sixthLayer: 5,
-		firstLayer: 6,
+		sixthLayer: 5
 	}
 	let isHome = true;
 
 	$('#playBoard').on('click', 'div', onPlatBoardClick)
+	//$('#playBoard div').on('click', platBoard)
+	// function platBoard(e){
+	// 	console.log(e.target.id)
+	// 	e.stopPropagation();
+	// }
 
 	function onPlatBoardClick(e) {
-		e.stopPropagation();
-		//let currId = e.target.id;
+		
 		let points = getScore(e.target.id)
 		applyScore(points)
+		e.stopPropagation();
 	}
 
 	function getScore(id) {
@@ -31,7 +35,7 @@ function dart() {
 			.split(' ')[0];
 	}
 
-	function selectPlayer(score) {
+	function applyScore(score) {
 		let selector = "";
 		isHome ? selector = '#Home' : selector = '#Away'
 		let $pointsElem;
