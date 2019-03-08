@@ -1,6 +1,4 @@
 function dart() {
-	let maxScore = 100;
-
 	const colorMapping = {
 		firstLayer: 0,
 		secondLayer: 1,
@@ -9,17 +7,12 @@ function dart() {
 		fifthLayer: 4,
 		sixthLayer: 5
 	}
+	let maxScore = 100;
 	let isHome = true;
-
 	$('#playBoard').on('click', 'div', onPlatBoardClick)
-	//$('#playBoard div').on('click', platBoard)
-	// function platBoard(e){
-	// 	console.log(e.target.id)
-	// 	e.stopPropagation();
-	// }
 
 	function onPlatBoardClick(e) {
-		
+
 		let points = getScore(e.target.id)
 		applyScore(points)
 		e.stopPropagation();
@@ -36,35 +29,28 @@ function dart() {
 	}
 
 	function applyScore(score) {
-		let selector = "";
-		isHome ? selector = '#Home' : selector = '#Away'
-		let $pointsElem;
+		let selectorOne = "";
+		let selectorTwo = "";
+		isHome ? selectorOne = '#Home' : selectorOne = '#Away'
+		isHome ? selectorTwo = '#Away' : selectorTwo = '#Home'
 
-
-		$pointsElem = $(selector).children().eq(0);
+		let $pointsElem = $(selectorOne).children().eq(0);
 		$pointsElem.text((i, t) => Number(t) + score);
 
 		//switch turns
-		$('turns').children().eq(0).insertBefore()///////////
+		$('#turns').children().eq(0).text(`Turn on ${selectorTwo.replace("#", "")}`);
+		$('#turns').children().eq(1).text(`Next is ${selectorOne.replace("#", "")}`);
 
 		let currentPoints = Number($pointsElem.text())
-		if ($pointsElem >= maxScore) {
+		if (currentPoints >= maxScore) {
 			//set coloring
 			if (isHome) {
-				$('#Home').children().eq(1).css({ backgroundColor: "green" })
-				$('#Away').children().eq(1).css({ backgroundColor: "red" })
-			} else {
-				$('#Home').children().eq(1).css({ backgroundColor: "red" })
-				$('#Away').children().eq(1).css({ backgroundColor: "green" })
+				$(selectorOne).children().eq(1).css({ backgroundColor: "green" })
+				$(selectorTwo).children().eq(1).css({ backgroundColor: "red" })
 			}
-
-
 			//Remove events
-			$('#playBoard').off('click')
+			$('#playBoard').off('click', onPlatBoardClick)
 		}
-
 		isHome = !isHome;
 	}
-
-
 }
