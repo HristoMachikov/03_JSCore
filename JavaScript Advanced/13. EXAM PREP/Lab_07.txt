@@ -1,0 +1,18 @@
+$.parseHTML() -> връща масив
+$($.parseHTML())
+
+cmder - konzola
+equal ==
+deepEqual === 
+strictEqual ===
+
+assert.closeTo(calc.divide(),5.25,0.01)
+
+assert.isArray(arr)
+assert.isEmpty(arr)
+
+shelf =shelf.filter(x=> x.bookName !== bookName)
+
+за да има chaining всеки (void празен) метод на класа трябва да връща this (return this;)
+let book = new class Bookshelf();
+book.addBook().addBook().addBook().toString(); - chaining

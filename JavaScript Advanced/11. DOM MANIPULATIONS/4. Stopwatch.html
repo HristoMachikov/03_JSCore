@@ -1,0 +1,37 @@
+<div id="time" style="border:3px solid blue; text-align:center; font-size:2em; margin-bottom:10px">00:00</div>
+<button id="startBtn">Start</button>
+<button id="stopBtn" disabled="true">Stop</button>
+<script>
+    window.onload = function stopWatch() {
+        let startBtnElem = document.getElementById('startBtn');
+        let stopBtnElem = document.getElementById('stopBtn');
+        let timerElem = document.getElementById('time');
+
+        startBtnElem.addEventListener('click', function () {
+            if (timerElem.textContent !== "00:00") {
+                timerElem.textContent = "00:00";
+            } else {
+                let timeInSeconds = 0;
+                timer = setInterval(() => {
+                    timeInSeconds += 1
+                    timerElem.textContent = showTime(timeInSeconds);
+                }, 1000);
+                startBtnElem.setAttribute('disabled', 'true')
+                stopBtnElem.removeAttribute('disabled')
+            }
+        });
+
+        stopBtnElem.addEventListener('click', function () {
+            clearInterval(timer);
+            stopBtnElem.setAttribute('disabled', 'true')
+            startBtnElem.removeAttribute('disabled')
+        })
+
+        function showTime(timeInSeconds) {
+            let seconds = timeInSeconds % 60;
+            let minutes = (Math.trunc(timeInSeconds / 60)) % 60;
+            return `${minutes < 10 ? "0" + minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+        }
+    }
+
+</script>
