@@ -1,0 +1,4 @@
+t2 - current Time
+
+engin  променя state -та
+draw изчертава промененото състояние   
