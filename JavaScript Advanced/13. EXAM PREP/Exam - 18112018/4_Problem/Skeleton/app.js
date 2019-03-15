@@ -13,6 +13,7 @@ function realEstateAgency() {
 	let $familyApartmentType = $('input[name="familyApartmentType"]');
 	let $familyName = $('input[name="familyName"]');
 
+	let profit = 0;
 	let $profit = $('#roof h1');
 	let $btnFindOffer = $('button[name="findOffer"]');
 	$btnFindOffer.on('click', findOffer);
@@ -39,24 +40,39 @@ function realEstateAgency() {
 			&& $familyApartmentType.val() && $familyName.val()) {
 			let searchInArr = Array.from($('#building').find('div'));
 			for (const offer of searchInArr) {
-				//console.log(offer)
 				let currPrice = +offer.children[0].textContent.split(': ')[1];
 				let currType = offer.children[1].textContent.split(': ')[1];
-				let currComm = +offer.children[2].textContent.split(': ')[1];
-				// console.log(currPrice)
-				// console.log(currType)
-				// console.log(currComm)
-				if (currType === $familyApartmentType.val()) {
-					//console.log(offer)
+				let currCommPercent = +offer.children[2].textContent.split(': ')[1];
+
+				let currCommision = currPrice * currCommPercent / 100;
+
+				if (currType === $familyApartmentType.val()
+					&& (currCommision + currPrice) <= +$familyBudget.val()) {
+					let $currDiv = createHomeElem($familyName.val());
+					$(offer).replaceWith($currDiv);
+					profit += 2 * currCommision;
+					$profit.text(`Agency profit: ${profit} lv.`);
+					$message.text("Enjoy your new home! :))");
+					break;
+				} else {
+					$message.text("We were unable to find you a home, so sorry :(");
 				}
 			}
-			//console.log(searchInArr);
+
+		} else {
+			$message.text("We were unable to find you a home, so sorry :(");
 		}
 
 		$familyBudget.val("");
 		$familyApartmentType.val("");
 		$familyName.val("");
+	}
 
+	function moveOut(event) {
+		let holeElem = event.target.parentNode;
+		let familyName = holeElem.children[0].textContent;
+		$message.text(`They had found cockroaches in ${familyName}\'s apartment`);
+		holeElem.parentNode.removeChild(holeElem);
 	}
 
 	function createRegElem(rent, type, commission) {
@@ -69,4 +85,32 @@ function realEstateAgency() {
 		return $div;
 	}
 
+	function createHomeElem(family) {
+		let $div = $("<div>");
+		$div.addClass("apartment");
+		$div.attr('style', "border: 2px solid red;");
+		let $pOne = $(`<p>${family}</p>`);
+		let $pTwo = $('<p>live here now</p>');
+		let $btn = $('<button>MoveOut</button>');
+		$btn.on('click', moveOut);
+		$div.append($pOne).append($pTwo).append($btn);
+		return $div;
+	}
+
 }
+
+            /*<div class="apartment">
+                <p>Rent: 500</p>
+                <p>Type: two rooms</p>
+                <p>Commission: 20</p>
+            </div>
+            <div class="apartment">
+                <p>Rent: 300</p>
+                <p>Type: single room</p>
+                <p>Commission: 10</p>
+            </div>
+            <div class="apartment">
+                <p>Rent: 600</p>
+                <p>Type: three rooms</p>
+                <p>Commission: 10</p>
+            </div>*/
