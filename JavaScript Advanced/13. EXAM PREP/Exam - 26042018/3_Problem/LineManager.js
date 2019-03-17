@@ -42,7 +42,7 @@ class LineManager {
 
     get atDepot() {
         let lastStop = this.stops[this.stops.length - 1];
-        if (lastStop.name === this.currentStop && this.currentStop.timeToNext === 0) {
+        if (lastStop.name === this.currentStop.name && this.currentStop.timeToNext === 0) {
             return true;
         } else {
             return false;
@@ -50,7 +50,7 @@ class LineManager {
     }
 
     get nextStopName() {
-        if (this.stops[this.stops.length - 1].name === this.currentStop.name) {
+        if (this.atDepot()) {
             return "At depot.";
         } else {
             let index = 0;

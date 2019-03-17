@@ -1,0 +1,8 @@
+jsrangers
+room number == cha
+room se maha ot array
+
+staite /50 math floor
+
+'HOTUNI DATABASE:\n--------------------\nbookingNumber – 1\nclientName – Peter\nroomType – single\nnights – 4\n----------\nbookingNumber – 2\nclientName – Robert\nroomType – double\nnights – 4\n----------\nbookingNumber – 3\nclientName – Geroge\nroomType – maisonette\nnights – 6\n----------'
+'HOTUNI DATABASE:\n--------------------\nbookingNumber - 1\nclientName - Peter\nroomType - single\nnights - 4\n----------\nbookingNumber - 2\nclientName - Robert\nroomType - double\nnights - 4\n----------\nbookingNumber - 3\nclientName - Geroge\nroomType - maisonette\nnights - 6\nservices: housekeeping, drink'
