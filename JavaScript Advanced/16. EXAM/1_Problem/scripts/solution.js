@@ -18,7 +18,6 @@ function solve() {
         let courseArr = [];
         let totalPrice = 0;
         let discount = 0;
-        let bonusDiscount = 0;
         let sum = 0;
 
         let $price = $('.courseFoot').eq(1).children().eq(0);
@@ -30,7 +29,6 @@ function solve() {
                 courseArr.push(el.value);
                 totalPrice += objPrice[el.value];
                 let currCourse = el.value;
-                let one
                 currCourse = currCourse
                     .replace(currCourse[0], currCourse[0].toUpperCase())
                     .replace(currCourse[1], currCourse[1].toUpperCase())
@@ -41,23 +39,20 @@ function solve() {
             if (courseArr.length === 4) {
                 $ul.append('<li>HTML and CSS</li>');
             }
-
             if ($selectedForm.val() === "online") {
-                //bonusDiscount = 0.06;
-                if (courseArr.includes("js-fundamentals")
-                    && courseArr.includes("js-advanced")) {
-                    totalPrice -= 17;
-                }
-                discount = totalPrice * 0.06;
+
+                courseArr.forEach(course => {
+                    discount += objPrice[course] * 0.06;
+                });
             }
             if (courseArr.includes("js-fundamentals")
                 && courseArr.includes("js-advanced")) {
-                discount += objPrice["js-advanced"] * 0.1; //+ bonusDiscount);
+                discount += objPrice["js-advanced"] * 0.1;
             }
             if (courseArr.includes("js-fundamentals")
                 && courseArr.includes("js-advanced")
                 && courseArr.includes("js-applications")) {
-                discount += modulePrice * 0.06; //+ bonusDiscount);
+                discount += modulePrice * 0.06;
             }
             sum = Math.floor(totalPrice - discount);
         }
