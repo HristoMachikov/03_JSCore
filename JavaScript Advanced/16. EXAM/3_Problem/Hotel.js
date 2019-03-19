@@ -2,9 +2,13 @@ class Hotel {
     constructor(name, capacity) {
         this.name = name, //string
             this.capacity = capacity, // number
-            this.booking = [],
-            this.currentBookingNumber = 1,
-            this.rooms = { single: 0, double: 0, maisonette: 0 }
+            this.booking ,  
+            this.currentBookingNumber = "1",
+            this.rooms //= {  //
+        // single: Math.floor(this.capacity * 0.5),
+        // double: Math.floor(this.capacity * 0.3),
+        // maisonette: Math.floor(this.capacity * 0.2)
+        // }
     }
     get name() {
         return this._name;
@@ -19,10 +23,17 @@ class Hotel {
     }
 
     set capacity(value) {
-        return this._capacity = value;
+        if (value >= 10) {
+            return this._capacity = value;
+        } else {
+            return this._capacity = 10;
+        }
     }
 
     get booking() {
+        if (this._booking === undefined) {
+            this._booking = [];
+        }
         return this._booking;
     }
 
@@ -38,6 +49,25 @@ class Hotel {
         return this._currentBookingNumber = value;
     }
 
+    get rooms() {
+        if (this._rooms === undefined) {
+            let single = Math.floor(this.capacity * 0.5);
+            let double = Math.floor(this.capacity * 0.3);
+            let maisonette = Math.floor(this.capacity * 0.2);
+
+            this._rooms = { single, double, maisonette };
+        }
+
+        return this._rooms;
+    }
+
+    set rooms(value) {
+        value.single = Math.floor(this.capacity * 0.5);
+        value.double = Math.floor(this.capacity * 0.3);
+        value.maisonette = Math.floor(this.capacity * 0.2);
+        return this._rooms = value;
+    }
+
     get roomsPricing() {
         let obj = { single: 50, double: 90, maisonette: 135 }
         return obj;
@@ -48,28 +78,16 @@ class Hotel {
         return obj;
     }
 
-    get rooms() {
-        return this._rooms;
-    }
-    set rooms(value) {
-        // let obj = { single: 0, double: 0, maisonette: 0 }
-        //if (this.capacity >= 10) {
-        value.single = Math.floor(this.capacity * 0.5);
-        value.double = Math.floor(this.capacity * 0.3);
-        value.maisonette = Math.floor(this.capacity * 0.2);
-        //  }
-        return this._rooms = value;
-    }
-
     rentARoom(clientName, roomType, nights) {
         let currBooking = { clientName, roomType, nights, roomNumber: 0 };
         if (this.roomsPricing.hasOwnProperty(roomType)
             && this.rooms[roomType] > 0
         ) {
-            currBooking.roomNumber = this.currentBookingNumber;
-            this.capacity -= 1;
+            currBooking.roomNumber = +this.currentBookingNumber;
+            this.rooms[roomType] -= 1;
+            this.capacity--;
             this.booking.push(currBooking);
-            return `Enjoy your time here Mr./Mrs. ${clientName}. Your booking is ${this.currentBookingNumber++}.`;
+            return `Enjoy your time here Mr./Mrs. ${clientName}. Your booking is ${+this.currentBookingNumber++}.`;
         } else {
             let output = `No ${roomType} rooms available!`;
             for (let room of Object.keys(this.rooms)) {
@@ -82,10 +100,10 @@ class Hotel {
     }
 
     roomService(currentBookingNumber, serviceType) {
-        if (this.servicesPricing.hasOwnProperty(serviceType)) {
-            let currRoom = this.booking
-                .filter(x => x.roomNumber === currentBookingNumber)[0];
-            if (currRoom) {
+        let currRoom = this.booking
+            .filter(x => x.roomNumber === currentBookingNumber)[0];
+        if (currRoom) {
+            if (this.servicesPricing.hasOwnProperty(serviceType)) {
                 this.booking.map(function (x) {
                     if (x.roomNumber === currentBookingNumber) {
                         if (!x.hasOwnProperty("services")) {
@@ -96,10 +114,11 @@ class Hotel {
                 })
                 return `Mr./Mrs. ${currRoom.clientName}, Your order for ${serviceType} service has been successful.`;
             } else {
-                return `The booking ${currentBookingNumber} is invalid.`;
+                return `We do not offer ${serviceType} service.`;
             }
         } else {
-            return `We do not offer ${serviceType} service.`;
+            return `The booking ${currentBookingNumber} is invalid.`;
+
         }
 
     }
@@ -116,17 +135,17 @@ class Hotel {
                 .filter(x => x.roomNumber !== currentBookingNumber);
             totalMoney = removeRoom.nights * this.roomsPricing[removeType];
             this.rooms[removeType] += 1;
-
+            this.capacity++;
             output += `We hope you enjoyed your time here, Mr./Mrs. ${removeRoom.clientName}. The total amount of money you have to pay is ${totalMoney} BGN.`;
             if (removeRoom.hasOwnProperty("services")) {
                 for (const service of removeRoom.services) {
                     totalServiceMoney += this.servicesPricing[service];
                 }
-                output += ` You have used additional room services, costing ${totalServiceMoney} BGN.`;
+                output = `We hope you enjoyed your time here, Mr./Mrs. ${removeRoom.clientName}. The total amount of money you have to pay is ${totalMoney + totalServiceMoney} BGN. You have used additional room services, costing ${totalServiceMoney} BGN.`;
             }
-            return output + "\n";
+            return output;
         } else {
-            return `The booking ${currentBookingNumber} is invalid.\n`;
+            return `The booking ${currentBookingNumber} is invalid.`;
         }
     }
 
@@ -143,14 +162,14 @@ class Hotel {
                 output += `roomType - ${obj.roomType}\n`;
                 output += `nights - ${obj.nights}\n`;
                 if (obj.services) {
-                    output += `services - ${obj.services.join(', ')}\n`;
+                    output += `services: ${obj.services.join(', ')}\n`;
                 }
                 output += `${count !== this.booking.length ? "-".repeat(10) : ""}\n`;
             }
         } else {
             output += `${this.name.toUpperCase()} DATABASE:\n`;
             output += `${"-".repeat(20)}\n`;
-            output += " There are currently no bookings.\n";
+            output += "There are currently no bookings.\n";
         }
         return output.trim();
     }
@@ -159,15 +178,21 @@ class Hotel {
 
 let hotel = new Hotel('HotUni', 10);
 
-hotel.rentARoom('Peter', 'single', 4);
-hotel.rentARoom('Robert', 'double', 4);
-hotel.rentARoom('Geroge', 'maisonette', 6);
+console.log(hotel.rentARoom('Peter', 'single', 4));
+console.log(hotel.rentARoom('Robert', 'double', 4));
+console.log(hotel.rentARoom('Geroge', 'maisonette', 6));
 
-hotel.roomService(3, 'housekeeping');
-hotel.roomService(3, 'drink');
-hotel.roomService(2, 'room');
+console.log(hotel.roomService(3, 'housekeeping'));
+console.log(hotel.roomService(3, 'drink'));
+console.log(hotel.roomService(2, 'room'));
 
 console.log(hotel.report());
 console.log(hotel.checkOut(3));
+//console.log(hotel.checkOut(2));
 console.log(hotel.report());
 
+console.log(hotel.rentARoom('Peter2', 'double', 4));
+console.log(hotel.rentARoom('Peter3', 'double', 4));
+console.log(hotel.rentARoom('Peter4', 'double', 4));
+console.log(hotel.rentARoom('Peter5', 'single', 4));
+console.log(hotel.rentARoom('Peter4', 'double', 4));

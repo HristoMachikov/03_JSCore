@@ -1,21 +1,28 @@
 (function solve() {
 
-    let $kingdom = $('#kingdom').children().eq(1).children().eq(0);
-    let $king = $('#kingdom').children().eq(1).children().eq(1);
-    let $rebuildBtn = $('#kingdom').children().eq(1).children().eq(2);
+    $('#kingdom button').on('click', rebuildKingdom);
 
-    $rebuildBtn.on('click', rebuildKingdom);
+    let kingdomArr = ["castle", "dungeon", "fortress", "inferno", "necropolis", "rampart", "stronghold", "tower", "conflux"];
+    let rebuildKingdomArr = [];
+    let objAttacker = { "MAGES": 70, "FIGHTERS": 50, "TANKS": 20 };
+    let objDefender = { "MAGES": 30, "FIGHTERS": 50, "TANKS": 80 };
 
-    let kingdomArr = ["CASTLE", "DUNGEON", "FORTRESS", "INFERNO", "NECROPOLIS", "RAMPART", "STRONGHOLD", "TOWER", "CONFLUX"];
     function rebuildKingdom() {
-        if ($king.val().trim().length >= 2
-            && kingdomArr.includes($kingdom.val().toUpperCase())) {
+        let $kingdom = $('#kingdom input').eq(0);
+        let $king = $('#kingdom input').eq(1);
 
-            let kingdomName = $kingdom.val().toLowerCase();
-            let $rebuildKingdom = $(`#${kingdomName}`);
+        let kingdom = $kingdom.val().toLowerCase();
+        let king = $king.val().toLowerCase();
+
+        if ($king.val().trim().length >= 2
+            && kingdomArr.includes(kingdom)
+            && !rebuildKingdomArr.includes(kingdom)) {
+
+            rebuildKingdomArr.push(kingdom)
+            let $rebuildKingdom = $(`#${kingdom}`);
 
             $rebuildKingdom.css("display", "inline-block");
-            let $h1 = $(`<h1>${kingdomName.toUpperCase()}</h1>`);
+            let $h1 = $(`<h1>${kingdom.toUpperCase()}</h1>`);
             let $div = $('<div class="castle"></div>');
             let $h2 = $(`<h2>${$king.val().toUpperCase()}</h2>`);
             $rebuildKingdom.append($h1).append($div).append($h2).append(createFieldsetElement());
@@ -37,13 +44,12 @@
     }
 
     //Join kingdom
-    let $joinCharacter = $('#characters').children().eq(3).children().eq(0);
-    let $joinKingdom = $('#characters').children().eq(3).children().eq(1);
-    let $joinBtn = $('#characters').children().eq(3).children().eq(2);
-
-    $joinBtn.on('click', joinKingdom);
+    $('#characters button').on('click', joinKingdom);
 
     function joinKingdom() {
+        let $joinCharacter = $('#characters').children().eq(3).children().eq(0);
+        let $joinKingdom = $('#characters').children().eq(3).children().eq(1);
+
         let $joinArmy = $('input[type="radio"]:checked');
         let currArmy = $joinArmy.val() + 's';
         let currKingdom = $joinKingdom.val().toLowerCase();
@@ -60,10 +66,54 @@
             armyElem.textContent = `${currArr[0]} - ${+currArr[1] + 1}`;
 
             let nameElem = $(`#${currKingdom}`).find('fieldset div')[0]
-            nameElem.textContent += ` ${$joinCharacter.val()}`; 
+            nameElem.textContent += `${$joinCharacter.val()} `;
+        } else {
+            $joinCharacter.val("");
+            $joinKingdom.val("");
         }
     }
 
     //WAR
+    $('#actions button').on('click', attack)
+
+    function attack() {
+        let $attacker = $('#actions input').eq(0);
+        let $defender = $('#actions input').eq(1);
+
+        let attacker = $attacker.val().toLowerCase();
+        let defender = $defender.val().toLowerCase();
+
+        if (rebuildKingdomArr.includes(attacker)
+            && rebuildKingdomArr.includes(defender)
+            && attacker !== defender) {
+
+            let armyAttacker = $(`#${attacker}`).find('fieldset p').toArray()
+                .map(x => x.textContent);
+            let armyDefender = $(`#${defender}`).find('fieldset p').toArray()
+                .map(x => x.textContent);
+
+            let attackerPoints = 0;
+            let defenderPoints = 0;
+
+            for (const elem of armyAttacker) {
+                let armyName = elem.split(' - ')[0];
+                let armyValue = Number(elem.split(' - ')[1]);
+                attackerPoints += objAttacker[armyName] * armyValue;
+            }
+            for (const elem of armyDefender) {
+                let armyName = elem.split(' - ')[0];
+                let armyValue = Number(elem.split(' - ')[1]);
+                defenderPoints += objDefender[armyName] * armyValue;
+            }
+
+            if (attackerPoints > defenderPoints) {
+                $(`#${defender} h2`).text($(`#${attacker} h2`).text());
+            }
+        }
+        else {
+            $attacker.val("");
+            $defender.val("");
+        }
+    }
 
 })();
