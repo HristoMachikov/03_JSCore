@@ -1,0 +1,28 @@
+7 layer of the OSI model 
+- application - top layer
+
+swapi.co
+
+postman
+
+list of HTTP status codes
+
+MIME types
+text/css
+text/html
+
+caniuse.com
+fatch модерен начин(api) за правене на заявка с javascript и последващо процесване
+
+const response =await fatch("https://swapi.co/api/peple/1/")
+
+Authentication - join Кой си ти
+
+Authorization - има роля
+
+https://api.github.com/users/testnakov/repos
+ - api на github e restfull
+
+json web towken
+
+jwt.io
