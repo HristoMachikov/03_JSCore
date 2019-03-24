@@ -1,0 +1,21 @@
+AJAX заявката може да се конфигурира според нашите нужди
+
+действия(показване на информация, нови елементи, SPA и др. ) които се извършват без презареждане на страницата
+
+
+npm install express -g
+express - библиотека която позволява да се прави сървър
+
+server.js
+const express = require('express');
+const app = express();
+app.use(express.static('./public'));
+app.listen(3000, ()=>c.log("SMTH"));
+
+
+$.load
+$.ajax({
+sucsess:my
+})
+
+bydefaut express търси index fail
