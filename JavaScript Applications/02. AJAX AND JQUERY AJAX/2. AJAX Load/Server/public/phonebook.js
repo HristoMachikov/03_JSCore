@@ -1,22 +1,24 @@
-(function () {
+function attachEvents() {
 
-    //$('#btnLoad').on('click', loadPhones);
-    //$('#btnCreate').on('click', createPhone);
+    $('#btnLoad').click(loadPhones);
+    $('#btnCreate').on('click', createPhone);
+
+    let url = "https://phonebook-nakov.firebaseio.com/phonebook";
+    let $phonebook = $('#phonebook');
 
     function loadPhones() {
-        let $phonebook = $('#phonebook');
-      //  $phonebook.empty();
-        let url = "https://phonebook-nakov.firebaseio.com/phonebook";
 
+        //  $phonebook.empty();
         $.ajax = ({
             method: 'GET',
-            url: url +".json",
-            success: (data)=> console.log(data),
+            url: url + ".json",
+            success: displayPhones,
             error: displayError
         })
-        //console.log("Load")
+        console.log("Load")
 
         function displayPhones(req) {
+            console.log("Load")
             console.log(req)
             req.forEach(repo => {
                 $phonebook.append(createLiElem(repo.html_url, repo.full_name))
@@ -24,15 +26,16 @@
         }
 
         function displayError(err) {
+            console.log("Err")
             if (err.readyState == 4 && err.status >= 400 && err.status < 500) {
                 $phonebook.append($(`<li>Error</li>`))
                 // $repos.append($(`<li>${err.responseText}</li>`))
             }
         }
 
-        function createLiElem( url, name) {
+        function createLiElem(url, name) {
             let $li = $("<li>");
-           // $li.id = id;
+            // $li.id = id;
             let $a = $(`<a href='${url}'>${name}</a>`);
             $li.append($a);
             return $li;
@@ -43,4 +46,4 @@
         console.log("Create")
     }
 
-})();
+};
