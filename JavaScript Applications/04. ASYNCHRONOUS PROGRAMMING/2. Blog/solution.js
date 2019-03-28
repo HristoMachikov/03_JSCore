@@ -1,9 +1,14 @@
 function attachEvents() {
-    let $postDetails = $('#post-body');
+    let $title = $('#post-title');
+    let $body = $('#post-body');
     let $comments = $('#post-comments');
-    let appKey = "kid_SyQmaDt_V/";
+    let $posts = $('#posts');
+
+    let appKey = "kid_SyQmaDt_V";
     let authToken = "bd846f07-a6f9-433f-b0d2-ffe9bc75770b.MEOZCLz9xWMzVB7Ub7UsdDGBapwgX5+P728l8Emqfds=";
     let baseUrl = "https://baas.kinvey.com/appdata/kid_SyQmaDt_V/posts";
+
+
     const authHeaders = {
         "Authorization": `Kinvey ${authToken}`,
         "Content-Type": "application/json"
@@ -13,8 +18,10 @@ function attachEvents() {
             url: baseUrl,
             headers: authHeaders,
         })
-            .then((res) => {
-                console.log(res);
+            .then((allPosts) => {
+                allPosts.forEach(post => {
+                    $posts.append(`<option value="${post._id}">${post.title}</option>`)
+                });
             })
             .catch(err => {
                 console.log(err);
@@ -22,7 +29,19 @@ function attachEvents() {
     })
 
     $('#btnViewPost').on('click', () => {
-
+        let $currPost = $posts.find(':selected');
+        
+        $.get({
+            url: baseUrl + '/' + `${$currPost.val()}`,
+            headers: authHeaders
+        })
+            .then((singlePost) => {
+                $title.text(`${singlePost.title}`);
+                $body.text(`${singlePost.body}`);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     })
 
 }
