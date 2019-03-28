@@ -20,3 +20,7 @@ await се слага преди функцията която вика промис (.then())
 
 caniuse.com
 template literal - ``
+
+data('id)
+PUT не се потдържа в Kinvet
+
