@@ -1,0 +1,16 @@
+        fieldset {
+            display: inline-block;
+            vertical-align: top;
+        }
+        
+         button {
+            display: inline-block;
+            padding: 5px;
+            margin-top:5px; 
+        }
+
+        input {
+            display: block;
+            padding: 5px;
+            margin-top:5px;
+        }

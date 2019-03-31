@@ -1,0 +1,27 @@
+./node_module/bootstrap/dist/css/bootstrap.min.css
+./node_module/bootstrap/dist/jquery.min.js
+
+../ - parent folder
+./ - current folder
+
+BS - Компонентна библиотека
+Responsive design
+col-md-6
+ld,md,sm,xs
+container-fluid
+
+m-3 margin 3
+mt-3 - margin top 3
+
+
+bootswatch
+-components
+--bootstrap forms
+--jumpbutton
+-dropdown
+-carocell
+-modal
+
+Модалите се преизползват - слага се най-отдолу
+
+cheatsheet
