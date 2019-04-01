@@ -17,6 +17,10 @@ function solve() {
     let currCountryId = "";
     let currTown = "";
     let currTownId = "";
+    let currTownCountry = "";
+
+    let arrCountries = [];
+
 
     $('#listCountries').on('click', listCountries)
     $('#countries').find('button[value="create"]').on("click", createCountry)
@@ -24,102 +28,117 @@ function solve() {
     $('#countries').find('button[value="delete"]').on("click", deleteCountry)
 
     $('#listTowns').on('click', listTowns)
-    // $('#towns').find('button[value="create"]').on("click", createTown)
-    // $('#towns').find('button[value="edit"]').on("click", editTown)
-    // $('#towns').find('button[value="delete"]').on("click", deleteTown)
+    $('#towns').find('button[value="create"]').on("click", createTown)
+    $('#towns').find('button[value="edit"]').on("click", editTown)
+    $('#towns').find('button[value="delete"]').on("click", deleteTown)
 
     async function listTowns() {
 
         $('#towns').find('ul').remove();
-        let checkCountry = $('#towns input').val();
-        if (checkCountry) {
-            try {
-                let request = await $.ajax({
-                    method: "GET",
-                    url: baseUrl + appKey + "/" + secondEndPoint,
-                    headers
-                })
-                let checkCountryArr = request.filter(x => x.country === checkCountry)
+        // let checkCountry = $('#towns input').val();
+        // if (checkCountry) {
+        try {
+            let request = await $.ajax({
+                method: "GET",
+                url: baseUrl + appKey + "/" + secondEndPoint,
+                headers
+            })
+            request.forEach(obj => {
+                if (!arrCountries.includes(obj.country)) {
+                    arrCountries.push(obj.country);
+                }
+            });
+            arrCountries.forEach(country => {
 
-                if (checkCountryArr) {
-                    let $ul = $(`<ul>${checkCountryArr[0].country}</ul>`);
-                    $ul.insertBefore('#towns input')
+                let $ul = $(`<ul data-country="${country}">${country}</ul>`);
+                let checkCountryArr = request.filter(x => x.country === country)
+                if (checkCountryArr.length > 0) {
+                    //currTownCountry = checkCountryArr[0].country
+
                     checkCountryArr.forEach(function (obj) {
                         let $li = $(`
                         <li id="${obj._id}">${obj.name}</li>
                     `);
                         $li.on('click', showTownInTheInput)
-                        $('#towns ul').append($li);
+                        $ul.append($li);
                     });
                 }
+                $ul.insertBefore('#towns input')
+            });
 
+
+        } catch (error) {
+            console.log(error)
+        }
+        arrCountries = [];
+        // }
+    }
+
+    function showTownInTheInput() {
+        currTown = event.target.textContent;
+        currTownId = event.target.id;
+        currTownCountry = $(event.target).parent().data("country");
+        $('#towns input').val(`${currTown}, ${currTownCountry}`);
+    }
+
+    async function createTown() {
+        if ($('#towns input').val()) {
+            let resultArr = $('#towns input').val().split(', ');
+            let currObj = {
+                "name": resultArr[0],
+                "country": resultArr[1]
+            }
+            try {
+                let response = await $.ajax({
+                    method: "POST",
+                    url: baseUrl + appKey + "/" + secondEndPoint,
+                    headers,
+                    data: JSON.stringify(currObj)
+                })
+                resetTowns()
             } catch (error) {
                 console.log(error)
             }
         }
     }
 
-    function showTownInTheInput() {
-        currTown = event.target.textContent;
-        currTownId = event.target.id;
-        $('#towns input').val(`${currTown}`)
+
+    async function editTown() {
+        //let country = $('#towns ul').val();
+        if ($('#towns input').val() && currTownId !== "") {
+            let resultArr = $('#towns input').val().split(', ');
+            let currObj = {
+                "name": resultArr[0],
+                "country": resultArr[1]
+            }
+            try {
+                let response = await $.ajax({
+                    method: "PUT",
+                    url: baseUrl + appKey + "/" + secondEndPoint + '/' + currTownId,
+                    headers,
+                    data: JSON.stringify(currObj)
+                })
+                resetTowns()
+            } catch (error) {
+                console.log(error)
+            }
+        }
     }
 
-    // async function createTown() {
-    //     let country = $('#towns ul').val();
-    //     if (country) {
-    //         let currObj = {
-    //             "name": $('#towns input').val(),
-    //             country
-    //         }
-    //         try {
-    //             let response = await $.ajax({
-    //                 method: "POST",
-    //                 url: baseUrl + appKey + "/" + secondEndPoint,
-    //                 headers,
-    //                 data: JSON.stringify(currObj)
-    //             })
-    //             resetTowns()
-    //         } catch (error) {
-    //             console.log(error)
-    //         }
-    //     }
-    // }
-
-
-    // async function editTown() {
-    //     let country = $('#towns ul').val();
-    //     if (country) {
-    //         let currObj = {
-    //             "name": $('#towns input').val(),
-    //             country
-    //         }
-    //         try {
-    //             let response = await $.ajax({
-    //                 method: "PUT",
-    //                 url: baseUrl + appKey + "/" + secondEndPoint + '/' + currTownId,
-    //                 headers,
-    //                 data: JSON.stringify(currObj)
-    //             })
-    //             resetTowns()
-    //         } catch (error) {
-    //             console.log(error)
-    //         }
-    //     }
-    // }
-
-    // async function deleteTown() {
-    //     try {
-    //         let response = await $.ajax({
-    //             method: "DELETE",
-    //             url: baseUrl + appKey + "/" + secondEndPoint + '/' + currTownId,
-    //             headers
-    //         })
-    //         resetTowns()
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
+    async function deleteTown() {
+        if ($('#towns input').val() && currTownId !== "") {
+            try {
+                let response = await $.ajax({
+                    method: "DELETE",
+                    url: baseUrl + appKey + "/" + secondEndPoint + '/' + currTownId,
+                    headers
+                })
+                resetTowns()
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }
 
 
 
