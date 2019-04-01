@@ -1,0 +1,10 @@
+just 
+mt 1-5 - разст. отвън
+mt 1-5 - разст. отвътре
+h tag - ове да се с клас h
+
+font awesome
+
+gitzip extension
+
+window.location.href = "http//.."- в .js

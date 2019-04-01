@@ -21,6 +21,7 @@ function solve() {
         let LastName = $('#createStudent').find('.lastName').val();
         let FacultyNumber = $('#createStudent').find('.facultyNumber').val();
         let Grade = +$('#createStudent').find('.grade').val();
+
         if (ID && FirstName && LastName && FacultyNumber && Grade) {
             let newStudent = {
                 ID,
@@ -45,6 +46,7 @@ function solve() {
     }
 
     async function listStudents() {
+        $("#results tbody tr:not(:first)").empty();
         try {
             let response = await $.ajax({
                 url: baseUrl + appKey + "/" + endPoint,
