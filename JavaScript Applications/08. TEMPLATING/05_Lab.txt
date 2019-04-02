@@ -1,0 +1,23 @@
+$(()=>{
+
+}); = document.load(()=>{})
+
+package.json
+npm instalл --save mustachе
+dependencies
+-name да е без space
+
+profile.hbs 
+{{#if isLogged}} != {{#unless isLogged}}
+
+ {{else}}
+
+{{/if}}
+
+{{#if ../isLogged}} - за достъпване на контекста на горния елемент
+
+контекста който се потдава на хендълбара е обект
+{{> contactInfo}} -партиал темплейт
+
+togle()
+vscode-icons
