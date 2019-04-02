@@ -46,7 +46,8 @@ function solve() {
     }
 
     async function listStudents() {
-        $("#results tbody tr:not(:first)").empty();
+        $("#results tbody tr>td").parent().empty();
+        //$("#results tbody tr:not(:first)").empty();
         try {
             let response = await $.ajax({
                 url: baseUrl + appKey + "/" + endPoint,
@@ -54,18 +55,19 @@ function solve() {
                 headers
             })
             let sortedResponse = response.sort((a, b) => a.ID - b.ID)
-            sortedResponse.forEach(function (student) {
+            console.log(sortedResponse)
+            for (const student of sortedResponse) {
                 let tr = `
-            <tr>
-                <td>${student.ID}</td>
-                <td>${student.FirstName}</td>
-                <td>${student.LastName}</td>
-                <td>${student.FacultyNumber}</td>
-                <td>${student.Grade}</td>
-            </tr>
-            `;
+                    <tr>
+                        <td>${student.ID}</td>
+                        <td>${student.FirstName}</td>
+                        <td>${student.LastName}</td>
+                        <td>${student.FacultyNumber}</td>
+                        <td>${student.Grade}</td>
+                    </tr>
+                `;
                 $('#results tbody').append(tr);
-            });
+            };
         } catch (error) {
             showError(error);
         }

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Countries And Towns</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./stylesBooks.css">
+</head>
+
+<body>
+    <h1>Books</h1>
+    <fieldset id="books">
+        <legend>Books List</legend>
+        <label for="title">Title:</label>
+        <input type="text" class="input" id="title" />
+        <label for="tag" style="display:none">Tag:</label>
+        <input type="text" class="input" id="tag" style="display:none" />
+        <label for="author">Author:</label>
+        <input type="text" class="input" id="author" />
+        <label for="isbn">ISBN:</label>
+        <input type="text" class="input" id="isbn" />
+        <button value="create">Create</button>
+        <button value="edit">Edit</button>
+        <button value="delete">Delete</button>
+        <br>(click book to edit/delete)
+    </fieldset>
+    <input id="listBooks" type="submit" value="List books">
+    <script src="./scriptBooks.js"></script>
+    <script>
+        solve();
+    </script>
+</body>
+
+</html>

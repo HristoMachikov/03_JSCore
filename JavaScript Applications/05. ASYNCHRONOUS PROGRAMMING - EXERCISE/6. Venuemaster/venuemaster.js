@@ -10,13 +10,17 @@ function attachEvents() {
         "Authorization": `Basic ${authoBase64}`,
         "Content-Type": "application/json"
     }
-    let currId = "";
-    let currQuantity = 0;
 
-    //  $(".purchase").on('click', purchase)
+    let currId = "";
+    let currTotalPrice = 0;
+    let currQuantity = 0;
+    let currName = "";
+    let currDateTime = "";
+
     $('#getVenues').on('click', getVenues)
 
     async function getVenues() {
+        $("#venue-info").empty();
         let venues = $('#venueDate').val();
         if (venues) {
             try {
@@ -27,6 +31,7 @@ function attachEvents() {
                     //calendar?query=${venues}
                     headers
                 })
+               
                 for (const id of response) {
                     try {
                         let venue = await $.ajax({
@@ -78,24 +83,26 @@ function attachEvents() {
         }
     }
 
-    function showInfo(event) {
+   async function showInfo(event) {
+        $('.venue-details').css('display', 'none')
         $(event.target).parent().parent().find('div').css('display', 'block')
     }
 
     function buyTickets(event) {
         let $parent = $(event.target).parent().parent().parent().parent().parent().parent();
-        let quantity = +$parent.find(`select option:selected`).text()
         let price = +$parent.find(`.venue-price`).text().split(' ')[0];
-        let name = $parent.find('.venue-name').text();
 
-        currId = $parent.id;
-        currQuantity = quantity;
+        currQuantity = +$parent.find(`select option:selected`).text();
+        currName = $parent.find('.venue-name').text();
+        currId = $parent.attr("id");
+        currTotalPrice = currQuantity * price;
+        currDateTime = $parent.find('p').last().text().split(': ')[1];
 
         let $span = $('<span class="head">Confirm purchase</span>');
         let $div = $(`<div class="purchase-info"> </div>`);
-        let $span1 = $(`<span>${name}</span>`);
-        let $span2 = $(`<span>${quantity} x ${price}</span>`);
-        let $span3 = $(`<span>Total: ${quantity * price} lv</span>`);
+        let $span1 = $(`<span>${currName}</span>`);
+        let $span2 = $(`<span>${currQuantity} x ${price}</span>`);
+        let $span3 = $(`<span>Total: ${currTotalPrice} lv</span>`);
         let $input = $('<input type="button" value="Confirm"></input>');
         $input.on('click', confirm);
         $($div).append($span1).append($span2).append($span3).append($input);
@@ -111,18 +118,30 @@ function attachEvents() {
             url: baseUrl + "rpc/" + appKey + "/" + endPoint + "/" + `purchase?venue=${currId}&qty=${currQuantity} `,
             headers
         })
+
+        let node = document.createTextNode(`You may print this page as your ticket`);
+        let div = `
+            <br>
+            <div class="ticket">
+                <div class="left">
+                    <span class="head">Venuemaster</span>
+                    <span class="venue-name">${currName}</span>
+                    <span class="bl">${currDateTime}</span>
+                    <br>
+                    <span class="bl">Admit ${currQuantity}</span>
+                    <span class="bl">${currTotalPrice} lv</span>
+                </div>
+                <div class="right">
+                    <span>Venue code</span>
+                    <br>
+                    <span>${currId}</span>
+                    <span class="head">Venuemaster</span>
+                </div>
+            </div>
+        `;
+  
         $("#venue-info").empty();
-        let info = document.getElementById("venue-info");
-        let node = document.createTextNode("You may print this page as your ticket");
-        let p = document.createElement("p");
-        p.appendChild(node);
-        info.appendChild(p);
-        console.log(response)
-        console.log(response.html)
-        let $div = response.html;
-        $("#venue-info").append($div);
-        //info.appendChild(response.html);
-        //$("#venue-info").append($(p));
+        $("#venue-info").append(node).append(div);
     }
 
 }

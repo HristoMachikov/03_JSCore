@@ -1,0 +1,26 @@
+        fieldset {
+            display: inline-block;
+            vertical-align: top;
+        }
+        
+         button {
+            display: inline-block;
+            padding: 5px;
+            margin-top:7px; 
+            margin-bottom:7px;
+            margin-right:10px;
+        }
+
+        input {
+            display: block;
+            padding: 5px;
+            margin-bottom:5px;
+        }
+        input#listBooks {
+            display: block;
+            padding: 5px;
+            margin-top:5px;
+            margin-left:70px;
+        }
+
+        

@@ -35,8 +35,7 @@ function solve() {
     async function listTowns() {
 
         $('#towns').find('ul').remove();
-        // let checkCountry = $('#towns input').val();
-        // if (checkCountry) {
+  
         try {
             let request = await $.ajax({
                 method: "GET",
@@ -53,7 +52,6 @@ function solve() {
                 let $ul = $(`<ul data-country="${country}">${country}</ul>`);
                 let checkCountryArr = request.filter(x => x.country === country)
                 if (checkCountryArr.length > 0) {
-                    //currTownCountry = checkCountryArr[0].country
 
                     checkCountryArr.forEach(function (obj) {
                         let $li = $(`
@@ -71,7 +69,6 @@ function solve() {
             console.log(error)
         }
         arrCountries = [];
-        // }
     }
 
     function showTownInTheInput() {
