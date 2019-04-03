@@ -1,3 +1,9 @@
 h5 {
     font-style: italic;
   }
+body {
+background: url("./images/hands-with-pencil-and-ruler.jpg");
+background-color: cover;
+background-repeat: no-repeat;
+
+  }

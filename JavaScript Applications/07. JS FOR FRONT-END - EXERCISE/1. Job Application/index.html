@@ -10,117 +10,145 @@
     <!-- <link rel="stylesheet" type="text/css" href="./Bootstrap/css/bootstrap.min.css" /> -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         crossorigin="anonymous">
-    <!-- <link rel="stylesheet" type="text/css" href="./fontawesome/fontawesome.min.css" /> -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-        crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="./styles.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.min.css"
-    />
+        <!-- <link rel="stylesheet" type="text/css" href="./fontawesome/fontawesome.min.css" /> -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+            crossorigin="anonymous">
+            <link rel="stylesheet" type="text/css" href="./styles.css" />
+            <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.min.css"
+            />
+            <link rel="stylesheet" type="text/css" href="./sweetalert/sweetalert.css" />
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+                crossorigin="anonymous"></script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                    crossorigin="anonymous"></script>
+                    <script src="./sweetalert/sweetalert.js"></script>
 
 </head>
 
 <body>
-    <div class="wrapper bg-warning">
-        <div class="container p-5 bg-info">
-            <h1 class="h text-center text-white">
-                <strong>JOB APPLICATION</strong>
-            </h1>
-            <h5 class="h5 text-center text-white">WE ARE LOOKING FOR SOMEONE LIKE YOU!</h5>
-            <div class="accordion mt-3" id="accordionExample">
-                <div class="card">
-                    <div class="card-header bg-info" id="headingOne">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link text-white" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
-                                aria-controls="collapseOne">
-                                <strong>Enter your data</strong>
-                            </button>
-                        </h5>
+    <div class="container">
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10 p-5 bg-info">
+                <h1 class="h text-center text-white">
+                    <strong>JOB APPLICATION</strong>
+                </h1>
+                <h5 class="h5 text-center text-white">WE ARE LOOKING FOR SOMEONE LIKE YOU!</h5>
+                <div class="accordion mt-3" id="accordionExample">
+                    <div class="card">
+                        <div class="card-header bg-info" id="headingOne">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link text-white" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                                    aria-controls="collapseOne">
+                                    <strong>Enter your data</strong>
+                                    </button>
+                            </h5>
+                        </div>
+
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <form>
+                                    <div class="form-group row">
+                                        <label for="lastName" class="col-form-label">Last Name</label>
+                                        <input type="text" class="form-control" id="lastName" placeholder="First Name">
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="firstName" class="col-form-label">First Name</label>
+                                        <input type="text" class="form-control" id="firstName" placeholder="First Name">
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail" class="col-form-label">Email address</label>
+                                        <input type="email" class="form-control" id="inputEmail" placeholder="Enter Email">
+                                        <p>
+                                            <small>We'l never share your email with anyone else.</small>
+                                        </p>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <a class="btn btn-block btn-social btn-facebook text-white" id="facebook">
+                                                <span class="fab fa-facebook "></span> Sign in with Facebook
+                                            </a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a class="btn btn-block btn-social btn-google text-white" id="google">
+                                                <span class="fab fa-google "></span> Sign in with Google
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
                     </div>
+                    <div class="card">
+                        <div class="card-header bg-info" id="headingTwo">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link text-white" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
+                                    aria-controls="collapseTwo">
+                                    <strong>Sotial Media Profiles</strong>
+                                    </button>
+                            </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                            <div class="card-body">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute,
+                                non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch
+                                3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda
+                                shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
+                                sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
+                                farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
+                                labore sustainable VHS.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header bg-info" id="headingThree">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link text-white" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false"
+                                    aria-controls="collapseThree">
+                                    <strong>Upload CV</strong>
+                                    </button>
+                            </h5>
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                            <div class="card-body">
 
-                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                        <div class="card-body">
-                            <form>
-                                <div class="form-group row">
-                                    <label for="lastName" class="col-form-label">Last Name</label>
-                                    <input type="text" class="form-control" id="lastName" placeholder="First Name">
-                                </div>
-                                <div class="form-group row">
-                                    <label for="firstName" class="col-form-label">First Name</label>
-                                    <input type="text" class="form-control" id="firstName" placeholder="First Name">
-                                </div>
-                                <div class="form-group row">
-                                    <label for="inputEmail" class="col-form-label">Email address</label>
-                                    <input type="email" class="form-control" id="inputEmail" placeholder="Enter Email">
-                                    <p>
-                                        <small>We'l never share your email with anyone else.</small>
-                                    </p>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <a class="btn btn-block btn-social btn-facebook text-white">
-                                            <span class="fab fa-facebook "></span> Sign in with Facebook
-                                        </a>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <a class="btn btn-block btn-social btn-google text-white">
-                                            <span class="fab fa-google "></span> Sign in with Google
-                                        </a>
-                                    </div>
-                                </div>
-
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-header bg-info" id="headingTwo">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link text-white" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
-                                aria-controls="collapseTwo">
-                                <strong>Sotial Media Profiles</strong>
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                        <div class="card-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute,
-                            non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
-                            moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch
-                            et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-                            Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic
-                            synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header bg-info" id="headingThree">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link text-white" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false"
-                                aria-controls="collapseThree">
-                                <strong>Upload CV</strong>
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                        <div class="card-body">
-
-                        </div>
-                    </div>
+                <div class="col-md-12 text-center ">
+                    <button class="btn btn-primary mt-3 " type="button ">SUBMIT</button>
                 </div>
             </div>
-            <div class="col-md-12 text-center ">
-                <button class="btn btn-primary mt-3 " type="button ">SUBMIT</button>
-            </div>
+            <div class="col-1"></div>
         </div>
     </div>
+   
 </body>
 <script>
     $('.collapse').collapse()
+    $('#facebook').on('click', showAlert);
+    $('#google').on('click', showAlert);
+
+    function showAlert(event) {
+        swal({
+            title: "Leave this site?",
+            text: `If you click 'OK' you will be redirected to 'http://${event.target.id}.com'`,
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-primary",
+            confirmButtonText: "OK",
+            closeOnConfirm: false,
+        },
+            function (isConfirm) {
+                if (isConfirm) {
+                    window.location.href = `http://${event.target.id}.com`;
+                }
+            });
+    }
+
 </script>
 
 </html>
