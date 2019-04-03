@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o"
+        crossorigin="anonymous"></script> -->
+
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+    <!-- <script src="main.js"></script> -->
+</head>
+
+<body>
+
+    <div class="wrapper m-3 pb-4 bg-ligth">
+
+        <h1 class="h text-dark">JS Core Module</h1>
+
+        <div id="accordion">
+            <h2 class="h text-dark mt-3">JS Essentials</h2>
+
+            <button class="btn btn-success" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Details
+            </button>
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                    В курса "JS Essentials" ще разгледате основния синтаксис на езика JavaScript. Изучават се типовете данни, оператори, изрази,
+                    условни конструкции, цикли и работа с функции. Ще се запознаете с DOM дървото и ще започнете да работите
+                    с JavaScript в браузъра. Курсът е силно насочен към практиката, с огромен брой упражнения в клас и практически
+                    изпит. Всички задачи от упражненията и изпитите се оценяват автоматизирано с онлайн Judge система. Оценяването
+                    в курса е на базата на предадени домашни и практически изпит.
+                </div>
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" data-whatever="JS Essentials">Apply</button>
+            </div>
+
+            <h2 class="h text-dark mt-3">JS Advanced</h2>
+            <button class="btn btn-success collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Details
+            </button>
+
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body">
+                    В курса "JS Advanced" ще надградите знанията си по JavaScript, като изучите по-сложните концепции като IFFE, clousure, objects
+                    и classes. Този курс ще развие алгоритмичното ви мислене и ще надгради знанията ви за DOM дървото. Ще
+                    се научите да манипулирате DOM дървото, да добавяте и триете елементи от него. Освен това, ще се научите
+                    как да тествате кода си използвайки библиотеки за Unit тестване. Ще разгледате OOP частта на JavaScript
+                    (inheritance, prototypes and prototypes chains). Оценяването в курса е на базата на предадени домашни
+                    и практически изпит.
+                </div>
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" data-whatever="JS Advanced">Apply</button>
+            </div>
+            <h2 class="h text-dark mt-3">JS Applications</h2>
+            <button class="btn btn-success collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Details
+            </button>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                <div class="card-body">
+                    В курса "JS Apps" ще научите какво сa HTTP заявки и как да ги използвате. Ще се запознаете с REST Services, какво са базите
+                    данни и как да работите с тях, какво означава асинхронен код, какво представляват Templating и Routing.
+                    Ще разберете каква е архитектурата на едно приложение и как да структурирате правилно апликациите си.
+                    На края на курса ще създадете собствен Single Page Application. Оценяването в курса е на базата на предадени
+                    домашни и практически изпит.
+                </div>
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" data-whatever="JS Applications">Apply</button>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="modal" id="exampleModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Yes</button>
+                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    $('.collapse').collapse()
+
+    $('#exampleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var recipient = button.data('whatever') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        modal.find('.modal-title').text('Apply for the ' + recipient + ' course')
+        modal.find('.modal-body p').text('Are you sure you want to apply for the ' + recipient + ' course?')
+    })
+
+</script>
+
+</html>
