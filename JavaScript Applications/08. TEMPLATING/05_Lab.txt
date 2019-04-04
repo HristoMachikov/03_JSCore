@@ -3,7 +3,7 @@ $(()=>{
 }); = document.load(()=>{})
 
 package.json
-npm instalл --save mustachе
+npm install --save mustachе
 dependencies
 -name да е без space
 
@@ -19,5 +19,5 @@ profile.hbs
 контекста който се потдава на хендълбара е обект
 {{> contactInfo}} -партиал темплейт
 
-togle()
+togle() = display:none
 vscode-icons
