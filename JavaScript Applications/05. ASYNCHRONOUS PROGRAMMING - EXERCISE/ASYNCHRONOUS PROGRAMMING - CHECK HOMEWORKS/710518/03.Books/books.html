@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Books</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+
+<body>
+    <div id="createBookForm">
+            <legend>Add Book</legend>
+            <label>Author</label>
+            <input type="text" id="author"/>
+            <label>Title</label>
+            <input type="text" id="title"/>
+            <label>ISBN</label>
+            <input type="text" id="isbn"/>
+            <button id="addBtn">Add</button>
+    </div>
+    <ul id="books">
+    </ul>
+    <script src="books.js"></script>
+    <script>
+        attachEvents();
+    </script>
+</body>
+
+</html>

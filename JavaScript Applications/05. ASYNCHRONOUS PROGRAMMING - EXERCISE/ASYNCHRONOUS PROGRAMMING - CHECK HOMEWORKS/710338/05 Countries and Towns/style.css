@@ -1,0 +1,136 @@
+* {
+    box-sizing: border-box;
+    outline: none !important;
+}
+body {
+    font-family: 'Montserrat';
+    font-size: 0;
+    margin: 0;
+}
+.half-column {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+    padding: 20px;
+}
+h2 {
+    text-align: center;
+    color: #0682f5;
+    font-size: 25px;
+}
+table {
+    border: 1px solid #0477e2;
+    border-radius: 5px;
+    width: 100%;
+}
+table th {
+    background: #0682f5;
+    color: #FFF;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 10px 0;
+    font-size: 20px;
+}
+tr {
+    background: #379dfd;
+    position: relative;
+}
+tr:nth-child(odd) {
+    background: #78bcfb;
+}
+.loader {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 30px;
+    color: #FFF;
+}
+td {
+    padding: 10px;
+    text-align: center;
+    position: relative;
+}
+#countries td:first-child {
+    padding: 10px 40px;
+}
+#towns td:first-child,
+#towns td:nth-child(2) {
+    padding: 10px 40px;
+}
+table input {
+    border: 1px solid #FFF;
+    border-radius: 5px;
+    padding: 5px;
+    background: transparent;
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 16px;
+    color: #FFF;
+    width: 150px;
+}
+table button {
+    background: #FFF;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+table button i {
+    transition: all 0.15s ease-in-out;
+}
+table button:hover i {
+    transform: scale(1.5);
+}
+table button.edit-country,
+table button.edit-town {
+    color: #0477e2;
+}
+table button.delete-country,
+table button.delete-town {
+    color: #d41530;
+}
+fieldset {
+    border-color: #0682f5;
+    margin-top: 20px;
+    border-radius: 5px;
+    text-align: center;
+    padding: 15px;
+    position: relative;
+}
+fieldset .loader {
+    color: #0682f5;
+    top: 30px;
+}
+fieldset legend {
+    text-align: center;
+    font-weight: 600;
+    color: #0682f5;
+    font-size: 18px;
+}
+fieldset input {
+    padding: 10px;
+    border: 1px solid #0682f5;
+    border-radius: 5px;
+    color: #0682f5;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'Montserrat';
+    margin-right: 20px;
+}
+fieldset button {
+    background: #0682f5;
+    border: 0;
+    color: #FFF;
+    padding: 11px;
+    display: inline-block;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+fieldset button i {
+    transition: all 0.15s ease-in-out;
+}
+fieldset button:hover i {
+    transform: scale(1.5);
+}

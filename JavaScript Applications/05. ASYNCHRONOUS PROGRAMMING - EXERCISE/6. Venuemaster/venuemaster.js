@@ -31,7 +31,7 @@ function attachEvents() {
                     //calendar?query=${venues}
                     headers
                 })
-               
+
                 for (const id of response) {
                     try {
                         let venue = await $.ajax({
@@ -83,7 +83,7 @@ function attachEvents() {
         }
     }
 
-   async function showInfo(event) {
+    async function showInfo(event) {
         $('.venue-details').css('display', 'none')
         $(event.target).parent().parent().find('div').css('display', 'block')
     }
@@ -118,30 +118,29 @@ function attachEvents() {
             url: baseUrl + "rpc/" + appKey + "/" + endPoint + "/" + `purchase?venue=${currId}&qty=${currQuantity} `,
             headers
         })
-
         let node = document.createTextNode(`You may print this page as your ticket`);
-        let div = `
-            <br>
-            <div class="ticket">
-                <div class="left">
-                    <span class="head">Venuemaster</span>
-                    <span class="venue-name">${currName}</span>
-                    <span class="bl">${currDateTime}</span>
-                    <br>
-                    <span class="bl">Admit ${currQuantity}</span>
-                    <span class="bl">${currTotalPrice} lv</span>
-                </div>
-                <div class="right">
-                    <span>Venue code</span>
-                    <br>
-                    <span>${currId}</span>
-                    <span class="head">Venuemaster</span>
-                </div>
-            </div>
-        `;
-  
+        // let div = `
+        //     <br>
+        //     <div class="ticket">
+        //         <div class="left">
+        //             <span class="head">Venuemaster</span>
+        //             <span class="venue-name">${currName}</span>
+        //             <span class="bl">${currDateTime}</span>
+        //             <br>
+        //             <span class="bl">Admit ${currQuantity}</span>
+        //             <span class="bl">${currTotalPrice} lv</span>
+        //         </div>
+        //         <div class="right">
+        //             <span>Venue code</span>
+        //             <br>
+        //             <span>${currId}</span>
+        //             <span class="head">Venuemaster</span>
+        //         </div>
+        //     </div>
+        // `;
+
         $("#venue-info").empty();
-        $("#venue-info").append(node).append(div);
+        $("#venue-info").append(node).append(response.html);
     }
 
 }
