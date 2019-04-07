@@ -1,0 +1,25 @@
+{{#each cats}}
+<div class="card col-md-4">
+    <img class="card-img-center" src="./images/{{img}}" width="250" height="250" alt="Card image cap">
+    <div class="card-block">
+        <button class="btn btn-primary" onclick="showInfo({{name}}{{sex}}{{age}}{{weight}})">{{name}}</button>
+        <div style="display: none" id="{{name}}{{sex}}{{age}}{{weight}}">
+            <h4 class="card-title">My name's {{name}}</h4>
+            <p class="card-text">Gender: {{sex}}</p>
+            <p class="card-text">Age: {{age}}</p>
+            <p class="card-text">Weigth: {{weight}}kg</p>
+            {{#if someInfo}}
+            <div class="row"> 
+                <div class="col-md-3">
+                    <p class="card-text">Some Info:</p>
+                </div>
+                <div class="col-md-4">
+                    <textarea disabled="true" class="card-text">{{someInfo}}</textarea>
+                </div>
+                <div class="col-md-5"></div>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</div>
+{{/each}}

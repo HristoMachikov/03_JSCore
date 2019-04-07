@@ -1,0 +1,16 @@
+window.location
+location.pathName = "about.html"; - презарежда страницата на новия path
+location.hash
+window.onhashchange = finction(e){
+
+c.log(location.hash)
+ }
+
+history.pushState() - само добавя стейт, не го trigger -ва
+history.replaceState() - не добавя стейт(не се запазва), само заменя, 
+
+-sammy може да cach -ва http. заявки
+this.swap() - с
+":product" - :параметър
+
+Application Session storage

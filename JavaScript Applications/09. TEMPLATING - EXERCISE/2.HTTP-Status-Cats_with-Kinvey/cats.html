@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Http Status Cats</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            <script src="./node_modules/handlebars/dist/handlebars.js"></script>
+            <script src="catSeeder.js"></script>
+
+</head>
+
+<body>
+    <form id="catForm">
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label for="inputName">Name</label>
+                <input type="text" class="form-control" id="inputName" placeholder="Name">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="inputGender">Gender</label>
+                <select id="inputGender" class="form-control">
+                    <option selected>Choose...</option>
+                    <option>male</option>
+                    <option>female</option>
+                </select>
+            </div>
+            <div class="form-group col-md-1">
+                <label for="inputAges">Ages</label>
+                <input type="number" class="form-control" id="inputAges" placeholder="Ages">
+            </div>
+            <div class="form-group col-md-1">
+                <label for="inputWeigth">Weigth</label>
+                <input type="number" class="form-control" id="inputWeigth" placeholder="...in kilos">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputInfo">Some Info</label>
+                <input type="text" class="form-control" id="inputInfo" placeholder="Type some info...">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="inputImgName">Image Name</label>
+                <input type="number" class="form-control" id="inputImgName" placeholder="min 1 / max 11" min="1" max="11">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <button type="button" class="btn btn-info" id="create">Add Cat</button>
+                <button type="button" class="btn btn-secondary" id="read">List Cats</button>
+            </div>
+        </div>
+    </form>
+    <div class="row"></div>
+    <div id="allCats">
+    </div>
+    <script src="template.js"></script>
+    <script>
+        solve();
+      //  renderCatTemplate();
+    </script>
+</body>
+
+</html>
