@@ -14,3 +14,6 @@ this.swap() - с
 ":product" - :параметър
 
 Application Session storage
+
+service -> hendler -> templates
+-> потдава
