@@ -5,8 +5,11 @@ $(() => {
         this.get("#/home", function () {
             this.loggedIn = !!sessionStorage.getItem('authtoken');
             this.username = sessionStorage.getItem('username');
-            this.hasTeam = !!sessionStorage.getItem('hasTeam');
-            this.teamId = !!sessionStorage.getItem('teamId');
+            this.hasTeam = sessionStorage.getItem('teamId') !== "undefined";
+            if (this.hasTeam) {
+                this.teamId = sessionStorage.getItem('teamId');
+            }
+
             this.loadPartials({
                 header: './templates/common/header.hbs',
                 footer: './templates/common/footer.hbs'
@@ -50,13 +53,13 @@ $(() => {
                 })
         })
 
-        this.get("#/logout", function () {
-            let that = this;
+        this.get("#/logout", function (ctx) {
+            // let that = this;
             auth.logout()
                 .then(function () {
                     sessionStorage.clear();
                     auth.showInfo("Successfull logout!")
-                    that.redirect("#/home")
+                    ctx.redirect("#/home")
                 })
         })
 
@@ -90,7 +93,117 @@ $(() => {
                 })
         })
 
+        this.get("#/catalog", function (ctx) {
+            ctx.loggedIn = !!sessionStorage.getItem('authtoken');
+            ctx.username = sessionStorage.getItem('username');
+            let userId = sessionStorage.getItem('userId');
+            this.hasNoTeam = sessionStorage.getItem('teamId') === "undefined";
 
+            teamsService.loadTeams()
+                .then(function (res) {
+                    ctx.teams = res;
+                    // let hasNoTeam = res.filter(x => x._acl.creator === userId)[0]
+                    // console.log(hasNoTeam)
+                    console.log(res)
+                    return ctx;
+                })
+                .then(function (ctx) {
+                    ctx.loadPartials({
+                        header: './templates/common/header.hbs',
+                        footer: './templates/common/footer.hbs',
+                        team: './templates/catalog/team.hbs'
+                    })
+                        .then(function () {
+                            this.partial("./templates/catalog/teamCatalog.hbs")
+                        })
+                })
+                .catch(err => console.log(err))
+        })
+
+        this.get("#/create", function (ctx) {
+            ctx.loggedIn = !!sessionStorage.getItem('authtoken');
+            ctx.username = sessionStorage.getItem('username');
+            ctx.loadPartials({
+                header: './templates/common/header.hbs',
+                footer: './templates/common/footer.hbs',
+                createForm: './templates/create/createForm.hbs'
+            })
+                .then(function () {
+                    this.partial("./templates/create/createPage.hbs")
+                })
+        })
+
+        this.post("#/create", function (ctx) {
+            let that = this;
+            console.log(ctx)
+            let { name, comment } = ctx.params;
+            teamsService.createTeam(name, comment)
+                .then(function (res) {
+                    console.log(res)
+                    //auth.saveSession(res)
+                    sessionStorage.setItem("teamId", res._id)
+                    auth.showInfo("Successfully created new team!")
+                    that.redirect('#/home')
+                })
+                .catch(function (err) {
+                    auth.handleError(err)
+                })
+        })
+
+        this.get('#/catalog/:teamId', async function (ctx) {
+            ctx.loggedIn = !!sessionStorage.getItem('authtoken');
+            ctx.username = sessionStorage.getItem('username');
+            //let teamId = ctx.params.currTeamId
+            ctx.teamId = ctx.params.teamId.slice(1);
+            console.log(ctx.teamId)
+            let res = await teamsService.loadTeamDetails(ctx.teamId);
+            console.log(res)
+            ctx.name = res.name;
+            ctx.comment = res.comment;
+            let creator = res._acl.creator;
+            ctx.isAuthor = false;
+            if (creator === sessionStorage.getItem('userId')) {
+                ctx.isAuthor = true;
+                ctx.isOnTeam = true;
+            }
+            ctx.loadPartials({
+                header: './templates/common/header.hbs',
+                footer: './templates/common/footer.hbs',
+                teamControls: 'templates/catalog/teamControls.hbs',
+                teamMember: 'templates/catalog/teamMember.hbs'
+            })
+                .then(function () {
+                    this.partial("./templates/catalog/details.hbs")
+                })
+        })
+
+
+        this.get('#/join/:teamId', async function (ctx) {
+            ctx.loggedIn = !!sessionStorage.getItem('authtoken');
+            ctx.username = sessionStorage.getItem('username');
+            //let teamId = ctx.params.currTeamId
+            ctx.teamId = ctx.params.teamId.slice(1);
+            console.log(ctx.teamId)
+            let res = await teamsService.loadTeamDetails(ctx.teamId);
+            console.log(res)
+            ctx.name = res.name;
+            ctx.comment = res.comment;
+            let creator = res._acl.creator;
+            ctx.isAuthor = false;
+            if (creator === sessionStorage.getItem('userId')) {
+                ctx.isAuthor = true;
+                ctx.isOnTeam = true;
+            }
+            ctx.loadPartials({
+                header: './templates/common/header.hbs',
+                footer: './templates/common/footer.hbs',
+                teamControls: 'templates/catalog/teamControls.hbs',
+                teamMember: 'templates/catalog/teamMember.hbs'
+            })
+                .then(function () {
+                    this.partial("./templates/catalog/details.hbs")
+                })
+        })
 
     });
 
