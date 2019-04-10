@@ -19,8 +19,13 @@ $(() => {
         //song routes
         this.get("#/create",handlers.getSong);
         this.post("#/create",handlers.createSong);
-
+        this.get("#/allSongs", handlers.getAllSongs)
+        this.get("#/mySongs", handlers.getMySongs)
+        this.get('#/remove/:id', handlers.removeSong)
+        this.get('#/listen/:id', handlers.listenSong)
+        this.get('#/like/:id', handlers.likeSong)
+    
     });
 
-    app.run();
+    app.run('#/');
 });
