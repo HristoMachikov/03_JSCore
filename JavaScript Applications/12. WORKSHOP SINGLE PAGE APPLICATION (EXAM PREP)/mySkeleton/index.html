@@ -1,0 +1,39 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="./styles/site.css">
+    <link rel="stylesheet" href="./styles/notifications.css">
+    <!-- node modules scripts -->
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./node_modules/handlebars/dist/handlebars.min.js"></script>
+    <script src="./node_modules/sammy/lib/sammy.js"></script>
+    <script src="./node_modules/sammy/lib/plugins/sammy.handlebars.js"></script>
+    <!-- basic scripts -->
+    <script src="./scripts/kinvey.js"></script>
+    <script src="./scripts/app.js"></script>
+    <script src="./scripts/notifications.js"></script>
+    <!-- services scripts -->
+    <script src="./scripts/services/user-service.js"></script>
+    <!-- handlers scripts -->
+    <script src="./scripts/handlers/home-handler.js"></script>
+    <script src="./scripts/handlers/user-handlers.js"></script>
+
+</head>
+
+
+<body>
+    <div id="root"></div>
+</body>
+
+<div id="notifications">
+    <div class="notification" id="loading">
+        Loading...
+    </div>
+    <div class="notification" id="info"></div>
+    <div class="notification" id="error"></div>
+</div>
+
+</html>

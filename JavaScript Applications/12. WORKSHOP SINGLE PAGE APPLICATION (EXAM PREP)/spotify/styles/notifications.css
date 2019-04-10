@@ -1,0 +1,62 @@
+#notifications {
+    float: right;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    text-align: center;
+    margin: 1em;
+}
+
+.notification {
+    font-size: 1.5em;
+    color: #ffffff;
+    display: none;
+    text-align: right;
+}
+
+.notification>span {
+    display: inline-block;
+    padding:  0.5em 2em 0.5em 2em;
+    border-radius: 10px;
+}
+
+#loadingBox>span {
+    background: #7CB3E9;
+}
+#infoBox>span {
+    background: #393;
+}
+#errorBox>span {
+    background: #F50;
+}
+
+
+
+
+/* #notifications {
+    float: left;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 10px;
+    text-align: center;
+}
+
+.notification {
+    border-radius: 20px;
+    padding: 10px;
+    width: 200px;
+    color: white;
+    display: none;
+}
+
+#loading {
+    background: rgb(55, 132, 184);
+}
+
+#info {
+    background: rgb(43, 172, 39);
+}
+#error {
+    background: rgb(204, 65, 60);
+} */
