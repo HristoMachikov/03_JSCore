@@ -1,0 +1,32 @@
+{{> header}}
+<section class="dashboard">
+    <h1>Dashboard</h1>
+    <nav class="navbar">
+        <ul>
+            <li>
+                <a href="#/showCategory">All</a>
+            </li>
+            <li>
+                <a href="#/showCategory">Cats</a>
+            </li>
+            <li>
+                <a href="#/showCategory">Dogs</a>
+            </li>
+            <li>
+                <a href="#/showCategory">Parrots</a>
+            </li>
+            <li>
+                <a href="#/showCategory">Reptiles</a>
+            </li>
+            <li>
+                <a href="#/showCategory">Other</a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="other-pets-list">
+        {{#each filetedPet}}
+            {{> otherPet}}
+        {{/each}}
+    </ul>
+</section>
+{{> footer}}
