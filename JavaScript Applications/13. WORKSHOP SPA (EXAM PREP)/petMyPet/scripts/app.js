@@ -16,7 +16,11 @@ $(() => {
         this.post("#/login", handlers.loginUser);
         this.get("#/logout", handlers.logoutUser);
         //appdata routes
-
+        this.get('#/dashboard', handlers.getDashboard)
+        this.get('#/dashboard/:category', handlers.getCategory)
+        this.get('#/create', handlers.getCreate)
+        this.post('#/create', handlers.create)
+        this.get('#/myPets', handlers.getMyPets)
     });
 
     app.run('#/');

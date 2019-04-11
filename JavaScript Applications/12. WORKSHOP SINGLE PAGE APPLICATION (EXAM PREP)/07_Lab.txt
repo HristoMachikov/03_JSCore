@@ -1,1 +1,3 @@
 kinvey query modifier -db> mongo 
+
+window.handler = window.handler || {}; - във всеки handler

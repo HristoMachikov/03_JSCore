@@ -4,29 +4,28 @@
     <nav class="navbar">
         <ul>
             <li>
-                <a href="#/showCategory">All</a>
+                <a href="#/dashboard">All</a>
             </li>
             <li>
-                <a href="#/showCategory">Cats</a>
+                <a href="#/dashboard/Cat">Cats</a>
             </li>
             <li>
-                <a href="#/showCategory">Dogs</a>
+                <a href="#/dashboard/Dog">Dogs</a>
             </li>
             <li>
-                <a href="#/showCategory">Parrots</a>
+                <a href="#/dashboard/Parrot">Parrots</a>
             </li>
             <li>
-                <a href="#/showCategory">Reptiles</a>
+                <a href="#/dashboard/Reptile">Reptiles</a>
             </li>
             <li>
-                <a href="#/showCategory">Other</a>
+                <a href="#/dashboard/Other">Other</a>
             </li>
         </ul>
     </nav>
     <ul class="other-pets-list">
-        {{#each filetedPet}}
+        {{#each otherPets}}
             {{> otherPet}}
         {{/each}}
     </ul>
 </section>
-{{> footer}}
