@@ -23,7 +23,9 @@ handlers.getCategory = async function (ctx) {
     if (categoriesArr.includes(category)) {
         let res = await petsService.getCategory(category)
 
-        let sortedRes = res.sort((a, b) => b.likes - a.likes);
+        let sortedRes = res
+            .filter(pet => pet._acl.creator !== sessionStorage.getItem('userId'))
+            .sort((a, b) => b.likes - a.likes);
         ctx.otherPets = sortedRes;
         ctx.isMyPets = ctx.path.includes('myPets');
         ctx.isAuth = userService.isAuth();
@@ -80,5 +82,96 @@ handlers.getMyPets = function (ctx) {
                 console.log(err)
             })
         })
+}
 
+handlers.detailsMyPet = function (ctx) {
+    let petId = ctx.params.petId;
+    petsService.getDetailsMyPet(petId)
+        .then(function (res) {
+            ctx.name = res[0].name
+            ctx.description = res[0].description
+            ctx.imageURL = res[0].imageURL
+            ctx.category = res[0].category
+            ctx.likes = res[0].likes
+            ctx._id = res[0]._id
+            ctx.partial('../templates/pets/detailsMyPet.hbs')
+        })
+        .catch(function (err) {
+            notifications.handleError(err);
+        })
+}
+
+handlers.editMyPet = function (ctx) {
+    let id = ctx.params.petId;
+    petsService.getDetailsMyPet(id)
+        .then(function (res) {
+            let data = res[0];
+            data.description = ctx.params.description
+            petsService.postDetailsMyPet(id, data)
+                .then(function () {
+                    notifications.showSuccess('Updated successfully!')
+                    ctx.redirect('#/home');
+                })
+        })
+}
+
+handlers.getDeletePet = function (ctx) {
+    let petId = ctx.params.petId;
+    petsService.getDetailsMyPet(petId)
+        .then(function (res) {
+            ctx.name = res[0].name
+            ctx.description = res[0].description
+            ctx.imageURL = res[0].imageURL
+            ctx.category = res[0].category
+            ctx.likes = res[0].likes
+            ctx._id = res[0]._id
+            ctx.partial('../templates/pets/deletePet.hbs')
+        })
+        .catch(function (err) {
+            notifications.handleError(err);
+        })
+}
+
+handlers.deletePet = function (ctx) {
+    let id = ctx.params.petId;
+    petsService.deleteMyPet(id)
+        .then(function (res) {
+            notifications.showSuccess('Pet removed successfully!');
+            ctx.redirect('#/dashboard');
+        })
+}
+
+handlers.detailsOtherPet = function (ctx) {
+    let petId = ctx.params.petId;
+    petsService.getDetailsMyPet(petId)
+        .then(function (res) {
+            ctx.name = res[0].name
+            ctx.description = res[0].description
+            ctx.imageURL = res[0].imageURL
+            ctx.category = res[0].category
+            ctx.likes = res[0].likes
+            ctx._id = res[0]._id
+            ctx.partial('../templates/pets/detailsOtherPet.hbs')
+        })
+        .catch(function (err) {
+            notifications.handleError(err);
+        })
+}
+
+handlers.likeOtherPet = function (ctx) {
+    let id = ctx.params.petId;
+    petsService.getDetailsMyPet(id)
+        .then(function (res) {
+            let data = res[0];
+            let newLiks = +data.likes + 1;
+            data.likes = newLiks;
+            petsService.postDetailsMyPet(id, data)
+                .then(function () {
+                    notifications.showSuccess('Liked successfully!')
+                    ctx.redirect('#/dashboard');
+                })
+                .catch(function (err) {
+                    notifications.handleError(err);
+                })
+        })
 }

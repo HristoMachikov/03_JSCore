@@ -21,6 +21,14 @@ $(() => {
         this.get('#/create', handlers.getCreate)
         this.post('#/create', handlers.create)
         this.get('#/myPets', handlers.getMyPets)
+
+        this.get('#/detailsMyPet/:petId', handlers.detailsMyPet)
+        this.post('#/detailsMyPet/:petId', handlers.editMyPet)
+        this.get('#/deletePet/:petId', handlers.getDeletePet)
+        this.post('#/deletePet/:petId', handlers.deletePet)
+
+        this.get('#/detailsOtherPet/:petId', handlers.detailsOtherPet)
+        this.get('#/like/:petId', handlers.likeOtherPet)
     });
 
     app.run('#/');

@@ -16,10 +16,25 @@ const petsService = (() => {
         return kinvey.get('appdata', `pets?query={"_acl.creator":"${userId}"}`, 'kinvey')
     }
 
+    function getDetailsMyPet(petId) {
+        return kinvey.get('appdata', `pets?query={"_id":"${petId}"}`, 'kinvey')
+    }
+
+    function postDetailsMyPet(petId, data) {
+        return kinvey.update('appdata', `pets/${petId}`, 'kinvey', data)
+    }
+
+    function deleteMyPet(petId) {
+        return kinvey.remove('appdata', `pets/${petId}`, 'kinvey')
+    }
+
     return {
         getDashboard,
         getCategory,
         create,
-        getMyPets
+        getMyPets,
+        getDetailsMyPet,
+        postDetailsMyPet,
+        deleteMyPet
     }
 })();
