@@ -1,7 +1,7 @@
 <div class="meme">
-    <a href="#" class="meme-title">{{title}}</a>
+    <a href="#/memeDetails/{{_id}}" class="meme-title">{{title}}</a>
     <br>
-    <a href="#">
+    <a href="#/memeDetails/{{_id}}">
         <img class="meme-image" src="{{imageUrl}}">
     </a>
     <div class="info">
@@ -12,7 +12,7 @@
             <a href="#/edit/{{_id}}" class="custom-button">Edit</a>
             <a href="#/remove/{{_id}}" class="custom-button">Delete</a>
             {{/if}}
-            <a href="#" class="creator">Creator: {{creator}}</a>
+            <a href="#/userProfil/{{_acl.creator}}" class="creator">Creator: {{creator}}</a>
         </div>
     </div>
     <hr>

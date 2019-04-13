@@ -1,0 +1,14 @@
+<div class="user-meme">
+    <a href="#/memeDetails/{{_id}}" class="user-meme-title">{{title}}</a>
+    <a href="#/memeDetails/{{_id}}">
+        <img class="userProfileImage" src="{{imageUrl}}">
+    </a>
+
+    <div class="user-memes-buttons">
+        {{#if isCurrCreator}}
+        <a href="#/edit/{{_id}}" class="user-meme-btn">Edit</a>
+        <a href="#/remove/{{_id}}" class="user-meme-btn">Delete</a> 
+        {{/if}}
+    </div>
+    
+</div>

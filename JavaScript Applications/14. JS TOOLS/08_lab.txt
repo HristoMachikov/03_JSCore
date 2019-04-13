@@ -1,0 +1,23 @@
+npm i webpack --save-dev
+--save-dev записва в девелопер депенденси === -D
+webpack geting started > asset meneger
+
+export defaut RootComponent;
+import RootComponent from './scripts/root-component';
+
+module.exports = RootComponent;
+const RootComponent = require('./scripts/root-component');
+
+export defaut = module.exports
+
+.node_modules\.bin\webpack  - извиква локално webpack
+npx webpack - извиква локално webpack
+
+ladash = _
+jquery = $
+
+import _ from 'loadash';
+import { each } from 'loadash'; - import only each from loadash;
+import each from 'loadash/each'; - import only each from loadash;
+
+hot Module Replacment - настройка на webpack сервър, която подменя без да рефрешва

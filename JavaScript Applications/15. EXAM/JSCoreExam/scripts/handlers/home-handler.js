@@ -8,6 +8,6 @@ handlers.getHome = function (ctx) {
     }).then(function () {
         this.partial('../templates/home.hbs')
     }).catch(function (err) {
-        notifications.showError(err);
+        console.log(err);
     });
 }

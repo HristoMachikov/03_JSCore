@@ -5,7 +5,7 @@ $(() => {
         this.use("Handlebars", "hbs");
         //home page routes
         this.get('/index.html', handlers.getHome);
-        //this.get('#/home', handlers.getHome);
+        this.get('#/home', handlers.getHome);
         this.get('/', handlers.getHome);
 
         //users routes
@@ -17,18 +17,17 @@ $(() => {
         this.get("#/logout", handlers.logoutUser);
         //appdata routes
 
-        this.get('#/home', handlers.allMemes);
-        this.get('#/memeDetails/:id', handlers.getMemeDetails);
-        this.get('#/userProfil/:userId', handlers.getUserDetails);
+        this.get("#/myListings", handlers.myListings);
+        this.get("#/allListings", handlers.allListings);
+        this.get("#/details/:id", handlers.getDetails);
 
-        this.get('#/createMeme', handlers.getCreateMeme);
-        this.post('#/createMeme', handlers.createMeme);
+        this.get("#/remove/:id", handlers.getRemoveListing);
 
-        this.get('#/edit/:id', handlers.getEditMeme);
-        this.post('#/edit/:id', handlers.editMeme);
+        this.get("#/create", handlers.getCreateListing);
+        this.post("#/create", handlers.createListing);
 
-        this.get('#/remove/:id', handlers.removeMeme);
-        this.get('#/removeUser/:id', handlers.removeUser);
+        this.get("#/edit/:id", handlers.getEditListing);
+        this.post("#/edit/:id", handlers.editListing);
 
     });
 

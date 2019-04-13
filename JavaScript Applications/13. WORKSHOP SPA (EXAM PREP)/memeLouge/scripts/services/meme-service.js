@@ -15,10 +15,20 @@ memeService = (() => {
         return kinvey.remove('appdata', `memes/${id}`, 'kinvey');
     }
 
+    function getMeme(id) {
+        return kinvey.get('appdata', `memes?query={"_id":"${id}"}`, 'kinvey');
+    }
+
+    function getUserMeme(userId) {
+        return kinvey.get('appdata', `memes?query={"_acl.creator":"${userId}"}&sort={"_kmd.ect": -1}`, 'kinvey');
+    }
+
     return {
         getAllMemes,
         createMeme,
         editMeme,
-        removeMeme
+        removeMeme,
+        getMeme,
+        getUserMeme
     }
 })();

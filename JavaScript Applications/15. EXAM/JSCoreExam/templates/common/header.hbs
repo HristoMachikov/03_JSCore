@@ -1,0 +1,10 @@
+<nav>
+    <li><a href="#/home">HOME</a></li>
+    {{#if isAuth}}
+    <li>Welcome, {{username}}</li>
+    <li><a href="#/logout">LOGOUT</a></li>
+    {{else}}
+    <li><a href="#/register">REGISTER</a></li>
+    <li><a href="#/login">LOGIN</a></li>
+    {{/if}}
+</nav>
