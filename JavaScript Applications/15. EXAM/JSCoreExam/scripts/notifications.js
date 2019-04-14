@@ -5,15 +5,15 @@ const notifications = (() => {
     })
 
     function showSuccess(message) {
-        let successBox = $('#infoBox');
-        successBox.find('span').text(message);
+        let successBox = $('#successBox');
+        successBox.text(message);
         successBox.fadeIn();
-        successBox.fadeOut(3000);
+        successBox.fadeOut(5000);
     }
 
     function showError(message) {
         let errorBox = $('#errorBox');
-        errorBox.find('span').text(message);
+        errorBox.text(message);
         errorBox.fadeIn();
         errorBox.on('click', fadeOutError);
     }

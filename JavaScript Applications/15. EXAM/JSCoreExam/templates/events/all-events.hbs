@@ -1,0 +1,11 @@
+{{> header}}
+<div id="eventsHolder">
+    {{#if isNotEmpty}}
+        {{#each events}}
+            {{> event}}
+        {{/each}}
+    {{else}}
+        {{> empty}}
+    {{/if}}
+</div>
+{{> footer}}
