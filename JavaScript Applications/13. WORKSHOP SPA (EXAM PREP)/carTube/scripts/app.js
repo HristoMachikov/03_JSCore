@@ -1,7 +1,7 @@
 const handlers = {};
 
 $(() => {
-    const app = Sammy("#container", function () {
+    const app = Sammy("#main", function () {
         this.use("Handlebars", "hbs");
         //home page routes
         this.get('/index.html', handlers.getHome);

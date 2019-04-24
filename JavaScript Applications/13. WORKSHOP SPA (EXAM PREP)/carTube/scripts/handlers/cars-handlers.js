@@ -27,14 +27,13 @@ handlers.allListings = async function (ctx) {
     try {
         let res = await carsService.getAllListings()
         res.forEach(car => car.isCreator = car.seller === ctx.username);
-        console.log(res)
         ctx.cars = res;
         ctx.loadPartials({
             header: "../templates/common/header.hbs",
             footer: "../templates/common/footer.hbs",
             car: "../templates/cars/listing.hbs"
         }).then(function () {
-            this.partial('../templates/cars/all-listings.hbs')
+            this.partial('../templates/cars/car-listings.hbs')
         }).catch(function (err) {
             notifications.handleError(err);
         });
@@ -50,13 +49,13 @@ handlers.getDetails = function (ctx) {
 
     carsService.getDetails(ctx.params.id)
         .then(function (res) {
-            let {title, imageUrl, brand, model, year, fuelType, price, description, _id, seller} = res[0];
+            let { title, imageUrl, brand, model, year, fuel, price, description, _id, seller } = res;
             ctx.title = title;
             ctx.imageUrl = imageUrl;
             ctx.brand = brand;
             ctx.model = model;
             ctx.year = year;
-            ctx.fuelType = fuelType;
+            ctx.fuel = fuel;
             ctx.price = price;
             ctx.description = description;
             ctx._id = _id;
@@ -101,12 +100,12 @@ handlers.getCreateListing = function (ctx) {
 }
 
 handlers.createListing = function (ctx) {
-    let data = { ...ctx.params }; ///
+    let data = { ...ctx.params };
     data.seller = sessionStorage.getItem('username');
-    let {title, imageUrl, brand, model, year, fuelType, price, description} = data;
+    let { title, imageUrl, brand, model, year, fuel, price, description } = data;
 
-    if (model.length > 11 || fuelType.length > 11 || brand.length > 11) {
-        notifications.showError('The brand, fuelType and model length must not exceed 11 characters!');
+    if (model.length > 11 || fuel.length > 11 || brand.length > 11) {
+        notifications.showError('The brand, fuel and model length must not exceed 11 characters!');
         return;
     }
     if (+price > 1000000) {
@@ -155,13 +154,13 @@ handlers.getEditListing = function (ctx) {
     carsService.getDetails(ctx.params.id)
         .then(function (res) {
             //ctx._id = ctx.params.id;
-            let {title, imageUrl, brand, model, year, fuelType, price, description, _id, seller} = res[0];
+            let { title, imageUrl, brand, model, year, fuel, price, description, _id } = res;
             ctx.title = title;
             ctx.imageUrl = imageUrl;
             ctx.brand = brand;
             ctx.model = model;
             ctx.year = year;
-            ctx.fuelType = fuelType;
+            ctx.fuel = fuel;
             ctx.price = price;
             ctx.description = description;
             ctx._id = _id;
@@ -182,8 +181,14 @@ handlers.getEditListing = function (ctx) {
 
 handlers.editListing = function (ctx) {
     let data = { ...ctx.params };
+
     data.seller = sessionStorage.getItem('username');
     let id = data._id;
+
+    // data.id = undefined;
+    // data = JSON.parse(JSON.stringify(data));
+    delete data.id;
+
     carsService.editListing(id, data)
         .then(function (res) {
             notifications.showSuccess(`Listing ${data.title} updated.`);
