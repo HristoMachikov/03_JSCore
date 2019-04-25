@@ -1,5 +1,5 @@
 # 03_JSCore
-
+<img src="JavaScript Fundamentals/javascript_img.png">
 <h2>JS Fundamentals</h2>
 <a href="https://github.com/HristoMachikov/03_JSCore/tree/master/JavaScript%20Fundamentals/01.%20JAVASCRIPT%20SYNTAX%20AND%20OPERATORS">01. JAVASCRIPT SYNTAX AND OPERATORS</a><em> - 15.01.2019</em></br>
 <a href="https://github.com/HristoMachikov/03_JSCore/tree/master/JavaScript%20Fundamentals/02.%20JAVASCRIPT%20SYNTAX%20AND%20OPERATORS%20-%20EXERCISE">02. JAVASCRIPT SYNTAX AND OPERATORS - EXERCISE</a><em> - 17.01.2019</em></br>
