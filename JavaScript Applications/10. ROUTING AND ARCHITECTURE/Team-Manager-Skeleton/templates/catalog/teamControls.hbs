@@ -2,7 +2,13 @@
     <a href="#/edit/:{{teamId}}" class="btn btn-default">Edit Info</a>
 {{/if}}
 {{#if isOnTeam}}
-    <a href="#/leave" class="btn btn-default">Leave Team</a>
+    {{#if oneMemberTeam}}
+        <a href="#/remove/:{{teamId}}" class="btn btn-default">Remove Team</a>
+    {{else}}
+        {{#if isTeamMember}}
+            <a href="#/leave" class="btn btn-default">Leave Team</a>
+        {{/if}}
+    {{/if}}
 {{else}}
     <a href="#/join/:{{teamId}}" class="btn btn-default">Join Team</a>
 {{/if}}

@@ -11,8 +11,7 @@ let teamsService = (() => {
     function edit(teamId, name, description) {
         let teamData = {
             name: name,
-            comment: description,
-            author: sessionStorage.getItem('username')
+            comment: description
         };
 
         return requester.update('appdata', 'teams/' + teamId, 'kinvey', teamData);
@@ -43,9 +42,16 @@ let teamsService = (() => {
             teamId: ''
         };
 
-       return requester.update('user', sessionStorage.getItem('userId'), userData, 'kinvey');
+        return requester.update('user', sessionStorage.getItem('userId'), 'kinvey', userData);
     }
 
+    function getMembers(id) {
+        return requester.get('user', `?query={"teamId":"${id}"}`, 'kinvey');
+    }
+
+    function removeTeam(teamId) {
+        return requester.remove('appdata', 'teams/' + teamId, 'kinvey');
+    }
 
     return {
         loadTeams,
@@ -53,6 +59,8 @@ let teamsService = (() => {
         edit,
         createTeam,
         joinTeam,
-        leaveTeam
+        leaveTeam,
+        getMembers,
+        removeTeam
     }
 })()

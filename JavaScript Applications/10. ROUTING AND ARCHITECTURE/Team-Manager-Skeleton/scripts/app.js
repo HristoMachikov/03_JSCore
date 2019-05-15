@@ -5,8 +5,10 @@ $(() => {
         this.get("#/home", function () {
             this.loggedIn = !!sessionStorage.getItem('authtoken');
             this.username = sessionStorage.getItem('username');
-            this.hasTeam = sessionStorage.getItem('teamId') !== "undefined";
-            if (this.hasTeam) {
+            this.hasTeam = false;
+            let teamId = sessionStorage.getItem('teamId');
+            if (teamId !== "undefined" && teamId) {
+                this.hasTeam = true;
                 this.teamId = sessionStorage.getItem('teamId');
             }
 
@@ -84,6 +86,7 @@ $(() => {
 
             auth.login(username, password)
                 .then(function (res) {
+
                     auth.saveSession(res)
                     auth.showInfo("Logined Successfully!")
                     that.redirect('#/home')
@@ -96,15 +99,16 @@ $(() => {
         this.get("#/catalog", function (ctx) {
             ctx.loggedIn = !!sessionStorage.getItem('authtoken');
             ctx.username = sessionStorage.getItem('username');
-            let userId = sessionStorage.getItem('userId');
-            this.hasNoTeam = sessionStorage.getItem('teamId') === "undefined";
+
+            this.hasNoTeam = true;
+            let teamId = sessionStorage.getItem('teamId');
+            if (teamId !== "undefined" && teamId) {
+                this.hasNoTeam = false;
+            }
 
             teamsService.loadTeams()
                 .then(function (res) {
                     ctx.teams = res;
-                    // let hasNoTeam = res.filter(x => x._acl.creator === userId)[0]
-                    // console.log(hasNoTeam)
-                    console.log(res)
                     return ctx;
                 })
                 .then(function (ctx) {
@@ -135,73 +139,150 @@ $(() => {
 
         this.post("#/create", function (ctx) {
             let that = this;
-            console.log(ctx)
             let { name, comment } = ctx.params;
-            teamsService.createTeam(name, comment)
+            let teamId;
+            if (name.trim() && comment.trim()) {
+                teamsService.createTeam(name, comment)
+                    .then(function (res) {
+                        sessionStorage.setItem("teamId", res._id)
+                        auth.showInfo("Successfully created new team!")
+                        teamId = res._id;
+                        let id = sessionStorage.getItem("userId");
+                        let username = sessionStorage.getItem("username");
+                        requester.update('user', id, 'kinvey', { username, teamId })
+                        that.redirect('#/home')
+                    })
+                    .catch(function (err) {
+                        auth.handleError(err)
+                    })
+            } else {
+                auth.showError('You have empty input fields!')
+            }
+        })
+
+        this.get('#/catalog/(:teamId)?', async function (ctx) {
+            ctx.loggedIn = !!sessionStorage.getItem('authtoken');
+            ctx.username = sessionStorage.getItem('username');
+
+            ctx.teamId = ctx.params.teamId.slice(1);
+            try {
+                let res = await teamsService.loadTeamDetails(ctx.teamId);
+                ctx.name = res.name;
+                ctx.comment = res.comment;
+                let creator = res._acl.creator;
+                ctx.isAuthor = false;
+                let teamId = sessionStorage.getItem('teamId');
+
+                if (creator === sessionStorage.getItem('userId') && teamId === res._id) {
+                    ctx.isAuthor = true;
+                }
+
+                if (teamId && teamId !== 'undefined') {
+                    ctx.isOnTeam = true;
+                }
+
+                ctx.isTeamMember = false;
+                if (teamId === res._id) {
+                    ctx.isTeamMember = true;
+                }
+
+                let response = await teamsService.getMembers(res._id)
+                ctx.members = response;
+                ctx.oneMemberTeam = false;
+                if (ctx.isAuthor && response.length === 1) {
+                    ctx.oneMemberTeam = true;
+                }
+                ctx.loadPartials({
+                    header: './templates/common/header.hbs',
+                    footer: './templates/common/footer.hbs',
+                    teamControls: 'templates/catalog/teamControls.hbs',
+                    teamMember: 'templates/catalog/teamMember.hbs'
+                })
+                    .then(function () {
+                        this.partial("./templates/catalog/details.hbs")
+                    })
+            } catch (err) {
+                auth.showError(err)
+            }
+        })
+
+        this.get("#/edit/:teamId", function (ctx) {
+            ctx.loggedIn = !!sessionStorage.getItem('authtoken');
+            ctx.username = sessionStorage.getItem('username');
+            ctx.teamId = ctx.params.teamId.slice(1);
+            teamsService.loadTeamDetails(ctx.teamId)
                 .then(function (res) {
-                    console.log(res)
-                    //auth.saveSession(res)
-                    sessionStorage.setItem("teamId", res._id)
-                    auth.showInfo("Successfully created new team!")
-                    that.redirect('#/home')
+                    ctx.name = res.name;
+                    ctx.comment = res.comment;
+                    ctx.loadPartials({
+                        header: './templates/common/header.hbs',
+                        footer: './templates/common/footer.hbs',
+                        editForm: './templates/edit/editForm.hbs'
+                    })
+                        .then(function () {
+                            this.partial("./templates/edit/editPage.hbs")
+                        })
+                })
+                .catch(function (err) {
+                    auth.showError(err)
+                })
+        })
+
+        this.post("#/edit/:teamId", function (ctx) {
+            ctx.loggedIn = !!sessionStorage.getItem('authtoken');
+            ctx.username = sessionStorage.getItem('username');
+            ctx.teamId = ctx.params.teamId.slice(1);
+            teamsService.edit(ctx.teamId, ctx.params.name, ctx.params.comment)
+                .then(function (res) {
+                    auth.showInfo(`Successfully edited team data!`)
+                    ctx.redirect('#/home')
+                })
+                .catch(function (err) {
+                    auth.showError(err)
+                })
+        })
+
+        this.get('#/join/:teamId', function (ctx) {
+            ctx.teamId = ctx.params.teamId.slice(1);
+            teamsService.joinTeam(ctx.teamId)
+                .then(function (res) {
+                    sessionStorage.setItem("teamId", ctx.teamId)
+                    auth.showInfo(`Successfully joined to the team!`)
+                    ctx.redirect('#/home')
                 })
                 .catch(function (err) {
                     auth.handleError(err)
                 })
         })
 
-        this.get('#/catalog/:teamId', async function (ctx) {
-            ctx.loggedIn = !!sessionStorage.getItem('authtoken');
-            ctx.username = sessionStorage.getItem('username');
-            //let teamId = ctx.params.currTeamId
+        this.get('#/remove/:teamId', function (ctx) {
             ctx.teamId = ctx.params.teamId.slice(1);
-            console.log(ctx.teamId)
-            let res = await teamsService.loadTeamDetails(ctx.teamId);
-            console.log(res)
-            ctx.name = res.name;
-            ctx.comment = res.comment;
-            let creator = res._acl.creator;
-            ctx.isAuthor = false;
-            if (creator === sessionStorage.getItem('userId')) {
-                ctx.isAuthor = true;
-                ctx.isOnTeam = true;
-            }
-            ctx.loadPartials({
-                header: './templates/common/header.hbs',
-                footer: './templates/common/footer.hbs',
-                teamControls: 'templates/catalog/teamControls.hbs',
-                teamMember: 'templates/catalog/teamMember.hbs'
-            })
-                .then(function () {
-                    this.partial("./templates/catalog/details.hbs")
+            teamsService.removeTeam(ctx.teamId)
+                .then(function (res) {
+                    teamsService.leaveTeam()
+                        .then(function (response) {
+                            sessionStorage.setItem("teamId", "undefined")
+                            auth.showInfo(`Successfully removed your one member team!`)
+                            ctx.redirect('#/home')
+                        })
+                        .catch(function (err) {
+                            auth.handleError(err)
+                        })
+                })
+                .catch(function (err) {
+                    auth.handleError(err)
                 })
         })
 
-
-        this.get('#/join/:teamId', async function (ctx) {
-            ctx.loggedIn = !!sessionStorage.getItem('authtoken');
-            ctx.username = sessionStorage.getItem('username');
-            //let teamId = ctx.params.currTeamId
-            ctx.teamId = ctx.params.teamId.slice(1);
-            console.log(ctx.teamId)
-            let res = await teamsService.loadTeamDetails(ctx.teamId);
-            console.log(res)
-            ctx.name = res.name;
-            ctx.comment = res.comment;
-            let creator = res._acl.creator;
-            ctx.isAuthor = false;
-            if (creator === sessionStorage.getItem('userId')) {
-                ctx.isAuthor = true;
-                ctx.isOnTeam = true;
-            }
-            ctx.loadPartials({
-                header: './templates/common/header.hbs',
-                footer: './templates/common/footer.hbs',
-                teamControls: 'templates/catalog/teamControls.hbs',
-                teamMember: 'templates/catalog/teamMember.hbs'
-            })
-                .then(function () {
-                    this.partial("./templates/catalog/details.hbs")
+        this.get("#/leave", function (ctx) {
+            teamsService.leaveTeam()
+                .then(function (res) {
+                    sessionStorage.setItem("teamId", "undefined")
+                    auth.showInfo(`Successfully leaved the team!`)
+                    ctx.redirect('#/home')
+                })
+                .catch(function (err) {
+                    auth.handleError(err)
                 })
         })
 
